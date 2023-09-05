@@ -8,6 +8,7 @@ class AdministracionAiApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println("funciona");
     }
 
 }
