@@ -16,16 +16,7 @@ public class Edificio {
     @Column(name = "direccion", length = 100, nullable = false)
     private String direccion;
 
-/*
-    @OneToMany
-    @JoinColumn(name = "codigo",referencedColumnName = "codigoEdificio")
-    private Unidad unidad;
-*/
- /*
-    @OneToMany
-    @JoinColumn(name = "codigo",referencedColumnName = "codigoEdificio")
-    private Reclamo reclamo;
-    */
+
 
     public Edificio(){
 

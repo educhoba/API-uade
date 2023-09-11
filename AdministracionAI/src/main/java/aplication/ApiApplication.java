@@ -120,7 +120,7 @@ public class ApiApplication implements CommandLineRunner {
         System.out.println("Hola Mundo Spring");
         List<Unidad> unidades = unidadRepositorio.findAll();
         for(Unidad p : unidades)
-            System.out.println("identificador:"+p.getIdentificador().toString()+ " piso:"+p.getPiso().toString());
+            System.out.println("identificador:"+p.getIdentificador().toString()+ " codigo:"+p.getPiso().toString());
 
         List<Edificio> edificio = edificioRepositorio.findAll();
         for(Edificio e : edificio)
