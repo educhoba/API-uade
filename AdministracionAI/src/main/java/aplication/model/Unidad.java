@@ -15,7 +15,6 @@ public class Unidad {
     private String habitado;
 
 /*
-
     @ManyToOne
     @JoinColumn(name = "codigoEdificio",referencedColumnName = "codigo")
     private Edificio edificio;
