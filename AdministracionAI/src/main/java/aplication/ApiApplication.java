@@ -107,7 +107,7 @@ public class ApiApplication implements CommandLineRunner {
         System.out.println("Hola Mundo Spring");
         List<Unidad> unidades = unidadRepositorio.findAll();
         for(Unidad p : unidades)
-            System.out.println("identificador:"+p.getIdentificador().toString()+ " piso:"+p.getPiso().toString());
+            System.out.println("identificador:"+p.getIdentificador().toString());
 
 /*
         Unidad nueva = new Provincia(51, "Mi Provincia");
