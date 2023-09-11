@@ -6,10 +6,16 @@ import jakarta.persistence.*;
 @Table(name="personas")
 public class Persona {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "documento", length = 20, nullable = false)
     private String documento;
+
+    @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
+
+    @Column(name = "mail", length = 100)
     private String mail;
+
+    @Column(name = "contrasenia", length = 100)
     private String contrasenia;
 
     /*

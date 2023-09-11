@@ -5,12 +5,25 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="imagenes")
 public class Imagen {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "numero")
     private Integer numero;
+
+    @Column(name = "path", length = 300, nullable = false)
     private String path;
+
+    @Column(name = "tipo", length = 10)
     private String tipo;
+
+    @Column(name = "idReclamo")
     private Integer idReclamo;
+
+    @ManyToOne
+    @JoinColumn(name = "idReclamo", referencedColumnName = "idReclamo", insertable = false, updatable = false)
+    private Reclamo reclamo;
+
 
     /*
         @ManyToOne

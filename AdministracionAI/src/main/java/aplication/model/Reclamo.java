@@ -5,35 +5,37 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="reclamos")
 public class Reclamo {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idReclamo;
-    private String documento;
-    private int codigo;
-    private String ubicacion;
-    private String descripcion;
-    private int identificador;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idReclamo;
 
-    /*
+    @Column(name = "documento", length = 20, nullable = false)
+    private String documento;
+
+    @Column(name = "codigo", nullable = false)
+    private int codigo;
+
+    @Column(name = "ubicacion", length = 300)
+    private String ubicacion;
+
+    @Column(name = "descripcion", length = 1000)
+    private String descripcion;
+
+    @Column(name = "identificador")
+    private int identificador;
+/*
     @ManyToOne
-    @JoinColumn(name = "codigoEdificio",referencedColumnName = "codigo")
+    @JoinColumn(name = "documento", referencedColumnName = "documento", insertable = false, updatable = false)
+    private Persona persona;
+
+    @ManyToOne
+    @JoinColumn(name = "codigo", referencedColumnName = "codigo", insertable = false, updatable = false)
     private Edificio edificio;
-    */
-    /*
-    @OneToMany
-    @JoinColumn(name = "idReclamo",referencedColumnName = "idReclamo")
-    private Imagen imagen;
-    */
-    /*
-    @OneToOne
-    @JoinColumn(name = "documento",referencedColumnName = "documento")
-    private Persona personas;
-    */
+*/
     public Reclamo(){
 
     }
-
+/*
     //<editor-fold desc="Getters">
     public String getDocumento() {
         return documento;
@@ -69,5 +71,5 @@ public class Reclamo {
         identificador = id;
     }
     //</editor-fold>
-
+*/
 }

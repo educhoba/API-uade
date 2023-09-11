@@ -77,8 +77,13 @@ public class AdministracionAiApplication {
 }
 */
 
+import aplication.model.Edificio;
 import aplication.model.Unidad;
+import aplication.model.*;
 
+
+import aplication.repository.IEdificioRepository;
+import aplication.repository.IImagenRespository;
 import aplication.repository.IUnidadRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,6 +100,14 @@ import java.util.List;
 public class ApiApplication implements CommandLineRunner {
     @Autowired
     IUnidadRepository unidadRepositorio;
+    @Autowired
+
+    IEdificioRepository edificioRepositorio;
+
+    @Autowired
+
+    IImagenRespository imagenRepositorio;
+
     public static void main(String[] args) {
         SpringApplication.run(ApiApplication.class, args);
 
@@ -108,6 +121,14 @@ public class ApiApplication implements CommandLineRunner {
         List<Unidad> unidades = unidadRepositorio.findAll();
         for(Unidad p : unidades)
             System.out.println("identificador:"+p.getIdentificador().toString()+ " piso:"+p.getPiso().toString());
+
+        List<Edificio> edificio = edificioRepositorio.findAll();
+        for(Edificio e : edificio)
+            System.out.println("Direccion --:"+e.getDireccion().toString());
+
+        List<Imagen> imagen = imagenRepositorio.findAll();
+        for(Imagen e : imagen)
+            System.out.println("Path --:"+e.getPath().toString());
 
 /*
         Unidad nueva = new Provincia(51, "Mi Provincia");

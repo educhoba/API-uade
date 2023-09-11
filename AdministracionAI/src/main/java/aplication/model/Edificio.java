@@ -7,9 +7,15 @@ import jakarta.persistence.*;
 public class Edificio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
     private Integer codigo;
+
+    @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
-    private String descripcion;
+
+    @Column(name = "direccion", length = 100, nullable = false)
+    private String direccion;
+
 /*
     @OneToMany
     @JoinColumn(name = "codigo",referencedColumnName = "codigoEdificio")
@@ -26,14 +32,14 @@ public class Edificio {
     }
 
     //<editor-fold desc="Getters">
-    public int getCodigo(){
+    public Integer getCodigo(){
         return codigo;
     }
     public String getNombre(){
         return this.nombre;
     }
-    public String getDescripcion(){
-        return this.descripcion;
+    public String getDireccion(){
+        return this.direccion;
     }
     //</editor-fold>
 
@@ -42,8 +48,8 @@ public class Edificio {
     public void setNombre(String nombre){
         this.nombre = nombre;
     }
-    public void setDescripcion(String desc){
-        descripcion = desc;
+    public void setDireccion(String desc){
+        direccion = desc;
     }
     //</editor-fold>
 }
