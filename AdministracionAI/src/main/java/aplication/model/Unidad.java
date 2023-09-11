@@ -14,14 +14,20 @@ public class Unidad {
     private String numero;
     private String habitado;
 
-/*
+    //@Column(name = "codigoEdificio")
+    //private int codigoEdificio;
     @ManyToOne
-    @JoinColumn(name = "codigoEdificio",referencedColumnName = "codigo")
+    @JoinColumn(name = "codigoEdificio", referencedColumnName = "codigo")
     private Edificio edificio;
-*/
 
     public Unidad() {
 
+    }
+
+    // Getters y setters
+
+    public Edificio getEdificio() {
+        return edificio;
     }
 
     public Integer getIdentificador() { return identificador;  }
