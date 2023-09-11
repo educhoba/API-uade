@@ -17,7 +17,7 @@ public class Unidad {
     //@Column(name = "codigoEdificio")
     //private int codigoEdificio;
     @ManyToOne
-    @JoinColumn(name = "codigoEdificio", referencedColumnName = "codigo")
+    @JoinColumn(name = "codigo_edificio")
     private Edificio edificio;
 
     public Unidad() {
