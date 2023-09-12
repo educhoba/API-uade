@@ -133,11 +133,10 @@ public class ApiApplication implements CommandLineRunner {
                 String nombreDelEdificio = edificioDeMiUnidad.getNombre();
                 System.out.println("Nombre dificio SIN cambio :" + nombreDelEdificio);
 
-                if(nombreDelEdificio.equals("Lizard")) {
-                    edificioDeMiUnidad.setNombre("Lizard Plaza");
+                if(nombreDelEdificio.equals("Lizard Plaza")) {
+                    edificioDeMiUnidad.setNombre("Lizard");
                     System.out.println("Nombre dificio CON cambio :" + edificioDeMiUnidad.getNombre());
-                    edificioRepositorio.save(edificioDeMiUnidad);
-                }
+                    }
             }
 
         }
