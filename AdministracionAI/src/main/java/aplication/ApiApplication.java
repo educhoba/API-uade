@@ -92,6 +92,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -135,6 +137,8 @@ public class ApiApplication implements CommandLineRunner {
 
                 if(nombreDelEdificio.equals("Lizard Plaza")) {
                     edificioDeMiUnidad.setNombre("Lizard");
+                    //para actualizar algo, primero get con el repositorio segun el id, set algo y despues save
+                    edificioRepositorio.save(edificioDeMiUnidad);
                     System.out.println("Nombre dificio CON cambio :" + edificioDeMiUnidad.getNombre());
                     }
             }
