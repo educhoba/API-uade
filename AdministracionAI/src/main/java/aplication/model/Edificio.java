@@ -23,6 +23,12 @@ public class Edificio {
     public Edificio(){
 
     }
+    public Edificio(Integer id, String nombre, String direccion){
+        this.codigo=id;
+        this.nombre=nombre;
+        this.direccion=direccion;
+
+    }
 
     //<editor-fold desc="Getters">
     public Integer getCodigo(){
@@ -41,6 +47,9 @@ public class Edificio {
     public void setNombre(String nombre){
         this.nombre = nombre;
     }
+
+
+
     public void setDireccion(String desc){
         direccion = desc;
     }
