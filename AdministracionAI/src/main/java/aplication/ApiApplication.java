@@ -77,8 +77,14 @@ public class AdministracionAiApplication {
 }
 */
 
+import aplication.model.Edificio;
 import aplication.model.Unidad;
+import aplication.model.*;
 
+
+import aplication.repository.IDuenioRepository;
+import aplication.repository.IEdificioRepository;
+import aplication.repository.IImagenRespository;
 import aplication.repository.IUnidadRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,6 +101,16 @@ import java.util.List;
 public class ApiApplication implements CommandLineRunner {
     @Autowired
     IUnidadRepository unidadRepositorio;
+
+    @Autowired
+    IEdificioRepository edificioRepositorio;
+
+    @Autowired
+    IImagenRespository imagenRepositorio;
+
+    @Autowired
+    IDuenioRepository duenioRepositorio;
+
     public static void main(String[] args) {
         SpringApplication.run(ApiApplication.class, args);
 
@@ -106,28 +122,35 @@ public class ApiApplication implements CommandLineRunner {
 
         System.out.println("Hola Mundo Spring");
         List<Unidad> unidades = unidadRepositorio.findAll();
-        for(Unidad p : unidades)
-            System.out.println("identificador:"+p.getIdentificador().toString());
+        for (Unidad p : unidades) {
+            System.out.println("----------- Departamento ------------");
 
-/*
-        Unidad nueva = new Provincia(51, "Mi Provincia");
-        provinciaRepositorio.save(nueva);
+            System.out.println("Identificador::" + p.getIdentificador().toString());
 
-        Optional<Provincia> recuperada = provinciaRepositorio.findById(17);
-        if(recuperada.isPresent())
-            System.out.println(recuperada.toString());
+            // de cada unidad obtengo su edificio
+            Edificio edificioDeMiUnidad = p.getEdificio();
+            if (edificioDeMiUnidad != null) {
+                String nombreDelEdificio = edificioDeMiUnidad.getNombre();
+                System.out.println("Nombre dificio SIN cambio :" + nombreDelEdificio);
 
-        recuperada = provinciaRepositorio.findByNombre("San Juan");
-        if(recuperada.isPresent())
-            System.out.println(recuperada.toString());
+                if(nombreDelEdificio.equals("Lizard Plaza")) {
+                    edificioDeMiUnidad.setNombre("Lizard");
+                    System.out.println("Nombre dificio CON cambio :" + edificioDeMiUnidad.getNombre());
+                    }
+            }
 
-        List<Club> clubes = clubRepositorio.findAll();
-        for(Club c : clubes)
-            System.out.println(c.toString());*/
+        }
+            List<Edificio> edificio = edificioRepositorio.findAll();
+            for (Edificio e : edificio)
+                System.out.println("Direccion --:" + e.getDireccion().toString());
+
+
+            List<Imagen> imagen = imagenRepositorio.findAll();
+            for (Imagen e : imagen)
+                System.out.println("Path --:" + e.getPath().toString());
+
+
+
+
+        }
     }
-}
-/*
-    public ResponseEntity<List<Beneficio>> listar() {
-        return ResponseEntity.ok(beneficioService.listar());
-    }
-*/
