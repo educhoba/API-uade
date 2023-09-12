@@ -1,5 +1,6 @@
 package aplication.model;
 
+import aplication.views.PersonaView;
 import jakarta.persistence.*;
 
 @Entity
@@ -60,6 +61,11 @@ public class Persona {
     }
     public void setContrasenia(String contrasenia){
         this.contrasenia = contrasenia;
+    }
+
+    public PersonaView toView() {
+        return null;
+        //todo
     }
     //</editor-fold>
 }

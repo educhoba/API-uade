@@ -2,6 +2,8 @@ package aplication.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name="edificios")
 public class Edificio {
@@ -52,6 +54,16 @@ public class Edificio {
 
     public void setDireccion(String desc){
         direccion = desc;
+    }
+
+    public Set<Persona> habilitados() {
+        return null;
+        //todo
+    }
+
+    public Set<Persona> duenios() {
+        return null;
+        //todo
     }
     //</editor-fold>
 }

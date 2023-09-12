@@ -37,8 +37,7 @@ public class DuenioService implements IService<Duenio,Duenio>{
     public void eliminar(Duenio entity) {
         iRepository.delete(entity);
     }
-    public Duenio buscarPorDocumento(String documento) {
-        Optional<Duenio> ret = iRepository.findByDocumento(documento);
-        return ret.orElse(null);
+    public List<Duenio> buscarPorDocumento(String documento) {
+        return iRepository.findByDocumento(documento);
     }
 }

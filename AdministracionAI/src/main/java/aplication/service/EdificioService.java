@@ -1,6 +1,7 @@
 package aplication.service;
 
 import aplication.model.Edificio;
+import aplication.model.Unidad;
 import aplication.repository.IEdificioRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,4 +41,7 @@ public class EdificioService implements IService<Edificio,Edificio> {
     }
 
 
+    public List<Unidad> getUnidades() {
+        return null; //todo
+    }
 }

@@ -1,6 +1,9 @@
 package aplication.model;
 
+import aplication.views.UnidadView;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 
 @Entity
@@ -13,8 +16,6 @@ public class Unidad {
     private String piso;
     private String numero;
     private String habitado;
-
-
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "codigoEdificio", referencedColumnName = "codigo", insertable = false, updatable = false)
@@ -58,4 +59,39 @@ public class Unidad {
     }
 
 
+    public UnidadView toView() {
+        return null; //todo
+    }
+
+    public List<Persona> getDuenios() {
+        return null; //todo
+    }
+
+    public List<Persona> getInquilinos() {
+        return null; //todo
+    }
+
+    public void transferir(Persona persona) {
+        //todo
+    }
+
+    public void agregarDuenio(Persona persona) {
+        //todo
+    }
+
+    public void alquilar(Persona persona) {
+        //todo
+    }
+
+    public void agregarInquilino(Persona persona) {
+        //todo
+    }
+
+    public void liberar() {
+        //todo
+    }
+
+    public void habitar() {
+        //todo
+    }
 }

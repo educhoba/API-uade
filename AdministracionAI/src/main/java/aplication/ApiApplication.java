@@ -77,6 +77,7 @@ public class AdministracionAiApplication {
 }
 */
 
+import aplication.controlador.Controlador;
 import aplication.model.Edificio;
 import aplication.model.Unidad;
 import aplication.model.*;
@@ -102,20 +103,9 @@ import java.util.List;
 @SpringBootApplication
 @SpringBootConfiguration
 public class ApiApplication implements CommandLineRunner {
-    @Autowired
-    EdificioService ediSvc;
 
-    @Autowired
-    ImagenService imgSvc;
 
-    @Autowired
-    PersonaService perSvc;
-
-    @Autowired
-    ReclamoService recSvc;
-
-    @Autowired
-    UnidadService uniSvc;
+    Controlador negocio;
 
     public static void main(String[] args) {
         SpringApplication.run(ApiApplication.class, args);

@@ -1,5 +1,6 @@
 package aplication.model;
 
+import aplication.views.Estado;
 import jakarta.persistence.*;
 
 @Entity
@@ -32,8 +33,21 @@ public class Reclamo {
     @JoinColumn(name = "codigo", referencedColumnName = "codigo", insertable = false, updatable = false)
     private Edificio edificio;
 */
-    public Reclamo(){
+    public Reclamo(Persona persona, Edificio edificio, String ubicacion, String descripcion, Unidad unidad){
 
+    }
+
+    public int getNumero() {
+        return 0;
+        //todo
+    }
+
+    public void agregarImagen(String direccion, String tipo) {
+        //todo
+    }
+
+    public void cambiarEstado(Estado estado) {
+        //todo
     }
 
 /*

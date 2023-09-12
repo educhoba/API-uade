@@ -36,8 +36,8 @@ public class InquilinoService implements IService<Inquilino,Inquilino> {
     public void eliminar(Inquilino entity) {
         iRepository.delete(entity);
     }
-    public Inquilino buscarPorDocumento(String documento) {
-        Optional<Inquilino> ret = iRepository.findByDocumento(documento);
-        return ret.orElse(null);
+    public List<Inquilino> buscarPorDocumento(String documento) {
+        List<Inquilino> ret = iRepository.findByDocumento(documento);
+        return ret;
     }
 }
