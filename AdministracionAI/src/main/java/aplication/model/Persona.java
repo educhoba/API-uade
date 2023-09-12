@@ -23,6 +23,12 @@ public class Persona {
     @JoinColumn(name = "documento",referencedColumnName = "documento")
     private Persona personas;
     */
+    public Persona(String documento, String nombre, String mail, String contrasenia){
+        this.documento= documento;
+        this.nombre= nombre;
+        this.mail= mail;
+        this.contrasenia= contrasenia;
+    }
     public Persona(){
 
     }

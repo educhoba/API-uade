@@ -4,6 +4,7 @@ import aplication.model.Edificio;
 import aplication.model.Inquilino;
 import aplication.repository.IDuenioRepository;
 import aplication.repository.IInquilinoRepositoy;
+import org.springframework.data.domain.Example;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,5 +36,8 @@ public class InquilinoService implements IService<Inquilino,Inquilino> {
     public void eliminar(Inquilino entity) {
         iRepository.delete(entity);
     }
-
+    public Inquilino buscarPorDocumento(String documento) {
+        Optional<Inquilino> ret = iRepository.findByDocumento(documento);
+        return ret.orElse(null);
+    }
 }

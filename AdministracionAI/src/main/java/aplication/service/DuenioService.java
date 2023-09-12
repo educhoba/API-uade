@@ -2,6 +2,7 @@ package aplication.service;
 
 import aplication.model.Duenio;
 import aplication.model.Edificio;
+import aplication.model.Inquilino;
 import aplication.repository.IDuenioRepository;
 import aplication.repository.IEdificioRepository;
 
@@ -35,5 +36,9 @@ public class DuenioService implements IService<Duenio,Duenio>{
     @Override
     public void eliminar(Duenio entity) {
         iRepository.delete(entity);
+    }
+    public Duenio buscarPorDocumento(String documento) {
+        Optional<Duenio> ret = iRepository.findByDocumento(documento);
+        return ret.orElse(null);
     }
 }

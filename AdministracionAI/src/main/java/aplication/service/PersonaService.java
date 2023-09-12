@@ -1,6 +1,10 @@
 package aplication.service;
 
+import aplication.model.Duenio;
+import aplication.model.Inquilino;
 import aplication.model.Persona;
+import aplication.repository.IDuenioRepository;
+import aplication.repository.IInquilinoRepositoy;
 import aplication.repository.IPersonaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +16,8 @@ import java.util.Optional;
 @Transactional
 public class PersonaService implements IService<Persona, Persona> {
     private IPersonaRepository iRepository;
+    private IDuenioRepository iDuenioRepository;
+    private IInquilinoRepositoy iInquilinoRepository;
 
     @Override
     public List<Persona> listar() {
@@ -39,4 +45,13 @@ public class PersonaService implements IService<Persona, Persona> {
         iRepository.delete(entity);
     }
 
+    public void registrarUsuario(String documento, String nombre, String mail, String contrasenia){
+
+        Optional<Duenio> duenioRet = iDuenioRepository.findByDocumento(documento);
+        Optional<Inquilino> inquilinoRet = iInquilinoRepository.findByDocumento(documento);
+        if(duenioRet.isPresent() || inquilinoRet.isPresent()){
+            guardar(new Persona(documento,nombre,mail,contrasenia));
+        }
+        //else throw exception
+    }
 }
