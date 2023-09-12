@@ -82,6 +82,7 @@ import aplication.model.Unidad;
 import aplication.model.*;
 
 
+import aplication.repository.IDuenioRepository;
 import aplication.repository.IEdificioRepository;
 import aplication.repository.IImagenRespository;
 import aplication.repository.IUnidadRepository;
@@ -100,13 +101,15 @@ import java.util.List;
 public class ApiApplication implements CommandLineRunner {
     @Autowired
     IUnidadRepository unidadRepositorio;
-    @Autowired
 
+    @Autowired
     IEdificioRepository edificioRepositorio;
 
     @Autowired
-
     IImagenRespository imagenRepositorio;
+
+    @Autowired
+    IDuenioRepository duenioRepositorio;
 
     public static void main(String[] args) {
         SpringApplication.run(ApiApplication.class, args);
@@ -119,36 +122,36 @@ public class ApiApplication implements CommandLineRunner {
 
         System.out.println("Hola Mundo Spring");
         List<Unidad> unidades = unidadRepositorio.findAll();
-        for(Unidad p : unidades)
-            System.out.println("identificador:"+p.getIdentificador().toString()+ " codigo:");
+        for (Unidad p : unidades) {
+            System.out.println("----------- Departamento ------------");
 
-        List<Edificio> edificio = edificioRepositorio.findAll();
-        for(Edificio e : edificio)
-            System.out.println("Direccion --:"+e.getDireccion().toString());
+            System.out.println("Identificador::" + p.getIdentificador().toString());
 
-        List<Imagen> imagen = imagenRepositorio.findAll();
-        for(Imagen e : imagen)
-            System.out.println("Path --:"+e.getPath().toString());
+            // de cada unidad obtengo su edificio
+            Edificio edificioDeMiUnidad = p.getEdificio();
+            if (edificioDeMiUnidad != null) {
+                String nombreDelEdificio = edificioDeMiUnidad.getNombre();
+                System.out.println("Nombre dificio SIN cambio :" + nombreDelEdificio);
 
-/*
-        Unidad nueva = new Provincia(51, "Mi Provincia");
-        provinciaRepositorio.save(nueva);
+                if(nombreDelEdificio.equals("Lizard")) {
+                    edificioDeMiUnidad.setNombre("Lizard Plaza");
+                    System.out.println("Nombre dificio CON cambio :" + edificioDeMiUnidad.getNombre());
+                    edificioRepositorio.save(edificioDeMiUnidad);
+                }
+            }
 
-        Optional<Provincia> recuperada = provinciaRepositorio.findById(17);
-        if(recuperada.isPresent())
-            System.out.println(recuperada.toString());
+        }
+            List<Edificio> edificio = edificioRepositorio.findAll();
+            for (Edificio e : edificio)
+                System.out.println("Direccion --:" + e.getDireccion().toString());
 
-        recuperada = provinciaRepositorio.findByNombre("San Juan");
-        if(recuperada.isPresent())
-            System.out.println(recuperada.toString());
 
-        List<Club> clubes = clubRepositorio.findAll();
-        for(Club c : clubes)
-            System.out.println(c.toString());*/
+            List<Imagen> imagen = imagenRepositorio.findAll();
+            for (Imagen e : imagen)
+                System.out.println("Path --:" + e.getPath().toString());
+
+
+
+
+        }
     }
-}
-/*
-    public ResponseEntity<List<Beneficio>> listar() {
-        return ResponseEntity.ok(beneficioService.listar());
-    }
-*/

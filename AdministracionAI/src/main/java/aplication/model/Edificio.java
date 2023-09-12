@@ -10,6 +10,8 @@ public class Edificio {
     @Column(name = "codigo")
     private Integer codigo;
 
+
+
     @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
 

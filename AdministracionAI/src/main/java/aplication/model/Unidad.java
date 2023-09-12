@@ -14,10 +14,10 @@ public class Unidad {
     private String numero;
     private String habitado;
 
-    //@Column(name = "codigoEdificio")
-    //private int codigoEdificio;
-    @ManyToOne
-    @JoinColumn(name = "codigo_edificio")
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "codigoEdificio", referencedColumnName = "codigo", insertable = false, updatable = false)
     private Edificio edificio;
 
     public Unidad() {
@@ -27,11 +27,11 @@ public class Unidad {
     // Getters y setters
 
     public Edificio getEdificio() {
-        return edificio;
+        return this.edificio;
     }
 
     public Integer getIdentificador() { return identificador;  }
-    public void setdentificador(Integer identificadorNuevo) {
+    public void setIentificador(Integer identificadorNuevo) {
         this.identificador=identificadorNuevo;
         return;
     }
