@@ -87,6 +87,7 @@ import aplication.repository.IEdificioRepository;
 import aplication.repository.IImagenRespository;
 import aplication.repository.IUnidadRepository;
 
+import aplication.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -102,16 +103,19 @@ import java.util.List;
 @SpringBootConfiguration
 public class ApiApplication implements CommandLineRunner {
     @Autowired
-    IUnidadRepository unidadRepositorio;
+    EdificioService ediSvc;
 
     @Autowired
-    IEdificioRepository edificioRepositorio;
+    ImagenService imgSvc;
 
     @Autowired
-    IImagenRespository imagenRepositorio;
+    PersonaService perSvc;
 
     @Autowired
-    IDuenioRepository duenioRepositorio;
+    ReclamoService recSvc;
+
+    @Autowired
+    UnidadService uniSvc;
 
     public static void main(String[] args) {
         SpringApplication.run(ApiApplication.class, args);
@@ -121,7 +125,8 @@ public class ApiApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // TODO Auto-generated method stub
-
+    /*
+    LEGACY
         System.out.println("Hola Mundo Spring");
         List<Unidad> unidades = unidadRepositorio.findAll();
         for (Unidad p : unidades) {
@@ -140,7 +145,8 @@ public class ApiApplication implements CommandLineRunner {
                     //para actualizar algo, primero get con el repositorio segun el id, set algo y despues save
                     edificioRepositorio.save(edificioDeMiUnidad);
                     System.out.println("Nombre dificio CON cambio :" + edificioDeMiUnidad.getNombre());
-                    }
+
+                }
             }
 
         }
@@ -155,6 +161,6 @@ public class ApiApplication implements CommandLineRunner {
 
 
 
-
+*/
         }
     }

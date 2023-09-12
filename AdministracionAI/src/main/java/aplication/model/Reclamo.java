@@ -35,6 +35,7 @@ public class Reclamo {
     public Reclamo(){
 
     }
+
 /*
     //<editor-fold desc="Getters">
     public String getDocumento() {

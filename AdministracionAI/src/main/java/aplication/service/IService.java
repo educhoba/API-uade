@@ -6,12 +6,12 @@ public interface IService<T, R> {
 
     List<T> listar();
 
-    T guardar(R item);
+    T guardar(R entity);
 
-    T buscar(Long id);
+    T buscarPorId(Long id);
 
-    void eliminar(Long id);
+    void eliminarPorId(Long id);
 
-    T modificar(Long id, R i);
+    void eliminar(R entity);
 
 }

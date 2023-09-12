@@ -2,44 +2,42 @@ package aplication.service;
 
 import aplication.model.Edificio;
 import aplication.repository.IEdificioRepository;
-import aplication.service.IService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
-import aplication.model.Unidad;
-import aplication.repository.IUnidadRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class EdificioService implements IService<Edificio,Edificio> {
-    private IEdificioRepository iEdificioRepository;
+    private IEdificioRepository iRepository;
 
     @Override
     public List<Edificio> listar() {
-        return null;
+        return iRepository.findAll();
     }
 
     @Override
-    public Edificio guardar(Edificio item) {
-        return null;
+    public Edificio guardar(Edificio entity) {
+        return iRepository.save(entity);
     }
 
     @Override
-    public Edificio buscar(Long id) {
-        return null;
+    public Edificio buscarPorId(Long id) {
+        Optional<Edificio> ret = iRepository.findById(id);
+        return ret.orElse(null);
     }
 
     @Override
-    public void eliminar(Long id) {
-
+    public void eliminarPorId(Long id) {
+        iRepository.deleteById(id);
     }
 
     @Override
-    public Edificio modificar(Long id, Edificio i) {
-        return null;
+    public void eliminar(Edificio entity) {
+        iRepository.delete(entity);
     }
+
+
 }

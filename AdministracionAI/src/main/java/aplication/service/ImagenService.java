@@ -2,44 +2,40 @@ package aplication.service;
 
 import aplication.model.Imagen;
 import aplication.repository.IImagenRespository;
-import aplication.service.IService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
-import aplication.model.Unidad;
-import aplication.repository.IUnidadRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class ImagenService implements IService<Imagen, Imagen> {
-    private IImagenRespository iImagenRepository;
+    private IImagenRespository iRepository;
 
     @Override
     public List<Imagen> listar() {
-        return null;
+        return iRepository.findAll();
     }
 
     @Override
-    public Imagen guardar(Imagen item) {
-        return null;
+    public Imagen guardar(Imagen entity) {
+        return iRepository.save(entity);
     }
 
     @Override
-    public Imagen buscar(Long id) {
-        return null;
+    public Imagen buscarPorId(Long id) {
+        Optional<Imagen> ret = iRepository.findById(id);
+        return ret.orElse(null);
     }
 
     @Override
-    public void eliminar(Long id) {
-
+    public void eliminarPorId(Long id) {
+        iRepository.deleteById(id);
     }
 
     @Override
-    public Imagen modificar(Long id, Imagen i) {
-        return null;
+    public void eliminar(Imagen entity) {
+        iRepository.delete(entity);
     }
 }
