@@ -13,7 +13,7 @@ public class DuenioService implements IService<Duenio,Duenio>{
 
     @Override
     public List<Duenio> listar() {
-        return null;
+        return iRepository.findAll();
     }
 
     @Override
