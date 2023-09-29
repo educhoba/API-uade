@@ -3,14 +3,24 @@ package aplication.service;
 import aplication.model.Edificio;
 import aplication.model.Inquilino;
 import aplication.repository.IDuenioRepository;
+import aplication.repository.IImagenRespository;
 import aplication.repository.IInquilinoRepositoy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
+@Transactional
 public class InquilinoService implements IService<Inquilino,Inquilino> {
     private IInquilinoRepositoy iRepository;
+
+    @Autowired
+    public InquilinoService(IInquilinoRepositoy iRepository){
+        this.iRepository=iRepository;
+    }
     @Override
     public List<Inquilino> listar() {
         return iRepository.findAll();

@@ -89,6 +89,7 @@ public class Controlador {
 
 
 
+
 	public List<PersonaView> habitantesPorEdificio(Long codigo) throws EdificioException{
 		List<PersonaView> resultado = new ArrayList<PersonaView>();
 		Edificio edificio = buscarEdificio(codigo);
@@ -98,14 +99,7 @@ public class Controlador {
 		return resultado;
 	}
 
-	public List<PersonaView> dueniosPorUnidad(Long codigo, String piso, String numero) throws UnidadException{
-		List<PersonaView> resultado = new ArrayList<PersonaView>();
-		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		List<Persona> duenios = unidad.getDuenios();
-		for(Persona persona : duenios)
-			resultado.add(persona.toView());
-		return resultado;
-	}
+
 
 	public List<PersonaView> inquilinosPorUnidad(Long codigo, String piso, String numero) throws UnidadException{
 		List<PersonaView> resultado = new ArrayList<PersonaView>();

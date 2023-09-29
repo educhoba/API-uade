@@ -10,4 +10,5 @@ import java.util.Optional;
 
 public interface IDuenioRepository extends JpaRepository<Duenio,Long> {
     public List<Duenio> findByDocumento(String documento);
+
 }

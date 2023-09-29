@@ -1,7 +1,9 @@
 package aplication.service;
 
 import aplication.model.Imagen;
+import aplication.repository.IDuenioRepository;
 import aplication.repository.IImagenRespository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +14,10 @@ import java.util.Optional;
 @Transactional
 public class ImagenService implements IService<Imagen, Imagen> {
     private IImagenRespository iRepository;
-
+    @Autowired
+    public ImagenService(IImagenRespository iRepository){
+        this.iRepository=iRepository;
+    }
     @Override
     public List<Imagen> listar() {
         return iRepository.findAll();

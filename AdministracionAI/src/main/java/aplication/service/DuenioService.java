@@ -5,17 +5,31 @@ import aplication.model.Edificio;
 import aplication.model.Inquilino;
 import aplication.repository.IDuenioRepository;
 import aplication.repository.IEdificioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
+@Transactional
 public class DuenioService implements IService<Duenio,Duenio>{
     private IDuenioRepository iRepository;
+
+    @Autowired
+    public DuenioService(IDuenioRepository iRepository){
+        this.iRepository=iRepository;
+    }
+
 
     @Override
     public List<Duenio> listar() {
         return iRepository.findAll();
     }
+
+
+
 
     @Override
     public Duenio guardar(Duenio entity) {

@@ -1,5 +1,7 @@
 package aplication.service;
 
+import aplication.repository.IReclamoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import aplication.model.Unidad;
@@ -12,7 +14,10 @@ import java.util.Optional;
 @Transactional
 public class UnidadService implements IService<Unidad, Unidad> {
     private IUnidadRepository iRepository;
-
+    @Autowired
+    public UnidadService(IUnidadRepository iRepository){
+        this.iRepository=iRepository;
+    }
     @Override
     public List<Unidad> listar() {
         return iRepository.findAll();

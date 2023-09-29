@@ -30,6 +30,11 @@ public class PersonaService implements IService<Persona, Persona> {
     @Autowired
     private IInquilinoRepositoy iInquilinoRepository;
 
+    @Autowired
+    public PersonaService(IPersonaRepository iRepository){
+        this.iRepository=iRepository;
+    }
+
     @Override
     public List<Persona> listar() {
         return iRepository.findAll();

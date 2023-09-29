@@ -1,7 +1,9 @@
 package aplication.service;
 
 import aplication.model.Reclamo;
+import aplication.repository.IPersonaRepository;
 import aplication.repository.IReclamoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +15,10 @@ import java.util.Optional;
 public class ReclamoService implements IService<Reclamo, Reclamo> {
     private IReclamoRepository iRepository;
 
-
+    @Autowired
+    public ReclamoService(IReclamoRepository iRepository){
+        this.iRepository=iRepository;
+    }
     @Override
     public List<Reclamo> listar() {
         return iRepository.findAll();
