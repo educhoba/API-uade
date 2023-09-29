@@ -3,6 +3,7 @@ package aplication.service;
 import aplication.model.Edificio;
 import aplication.model.Unidad;
 import aplication.repository.IEdificioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,11 @@ import java.util.Optional;
 @Transactional
 public class EdificioService implements IService<Edificio,Edificio> {
     private IEdificioRepository iRepository;
+
+    @Autowired
+    public EdificioService(IEdificioRepository iRepository){
+        this.iRepository=iRepository;
+    }
 
     @Override
     public List<Edificio> listar() {

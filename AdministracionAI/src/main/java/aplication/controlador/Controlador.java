@@ -16,8 +16,13 @@ import aplication.exceptions.PersonaException;
 import aplication.exceptions.ReclamoException;
 import aplication.exceptions.UnidadException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-
+@RestController
+@RequestMapping("/test")
 public class Controlador {
 
 	private static Controlador instancia;
@@ -31,6 +36,9 @@ public class Controlador {
 
 
 	ReclamoService recSvc;
+
+	@Autowired
+	private EdificioService edificioService;
 
 
 	UnidadService uniSvc;
@@ -72,6 +80,14 @@ public class Controlador {
 			resultado.add(persona.toView());
 		return resultado;
 	}
+
+
+	@GetMapping
+	public ResponseEntity<List<Edificio>> listar() {
+		return ResponseEntity.ok(edificioService.listar());
+	}
+
+
 
 	public List<PersonaView> habitantesPorEdificio(Long codigo) throws EdificioException{
 		List<PersonaView> resultado = new ArrayList<PersonaView>();
