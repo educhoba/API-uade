@@ -41,18 +41,5 @@ public class DuenioController {
         return ResponseEntity.ok(duenioService.listar());
     }
 
-
-    @GetMapping("/dueniosPorUnidad/{codigo}/{piso}/{numero}")
-    //public ResponseEntity<?> buscarBeneficiosTarjeta(@PathVariable Long idTarjeta) {
-    public ResponseEntity<List<PersonaView>> dueniosPorUnidad(@PathVariable Long codigo,@PathVariable String piso,@PathVariable String numero) throws UnidadException {
-        List<PersonaView> resultado = new ArrayList<PersonaView>();
-        Unidad unidad = listar(codigo, piso, numero);
-        List<Persona> duenios = unidad.getDuenios();
-        for(Persona persona : duenios)
-            resultado.add(persona.toView());
-        return ResponseEntity.ok(resultado);
-
-    }
-
 }
 

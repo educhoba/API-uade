@@ -1,6 +1,7 @@
 package aplication.service;
 
 import aplication.model.Reclamo;
+import aplication.model.Unidad;
 import aplication.repository.IPersonaRepository;
 import aplication.repository.IReclamoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,13 @@ public class ReclamoService implements IService<Reclamo, Reclamo> {
     public ReclamoService(IReclamoRepository iRepository){
         this.iRepository=iRepository;
     }
+
     @Override
     public List<Reclamo> listar() {
         return iRepository.findAll();
     }
+
+
 
     @Override
     public Reclamo guardar(Reclamo entity) {

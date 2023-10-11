@@ -1,5 +1,6 @@
 package aplication.service;
 
+import aplication.model.Edificio;
 import aplication.repository.IReclamoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,13 @@ public class UnidadService implements IService<Unidad, Unidad> {
         Optional<Unidad> ret = iRepository.findById(id);
         return ret.orElse(null);
     }
-
+/*
+    @Override
+    public Edificio buscarEdificioDeUnidad() {
+        Optional<Edificio> ret = this.getEdificio();
+        return ret.orElse(null);
+    }
+*/
     @Override
     public void eliminarPorId(Long id) {
         iRepository.deleteById(id);
@@ -43,6 +50,12 @@ public class UnidadService implements IService<Unidad, Unidad> {
     public void eliminar(Unidad entity) {
         iRepository.delete(entity);
     }
+
+
+
+
+
+
 
 /*
     @Autowired

@@ -24,22 +24,29 @@ public class Reclamo {
 
     @Column(name = "identificador")
     private int identificador;
-/*
-    @ManyToOne
+
+    // edifico reclamo
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "codigo", referencedColumnName = "codigo", insertable = false, updatable = false)
+    private Edificio edificio;
+
+    // persona reclamo
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "documento", referencedColumnName = "documento", insertable = false, updatable = false)
     private Persona persona;
 
-    @ManyToOne
-    @JoinColumn(name = "codigo", referencedColumnName = "codigo", insertable = false, updatable = false)
-    private Edificio edificio;
-*/
+
+
     public Reclamo(Persona persona, Edificio edificio, String ubicacion, String descripcion, Unidad unidad){
 
     }
 
-    public int getNumero() {
-        return 0;
-        //todo
+    public Reclamo() {
+
+    }
+
+    public int getIdentificador() {
+        return this.identificador;
     }
 
     public void agregarImagen(String direccion, String tipo) {
@@ -50,7 +57,18 @@ public class Reclamo {
         //todo
     }
 
-/*
+    public Edificio getEdificio() {
+        return this.edificio;
+    }
+    public Persona getPersona() {
+        return this.persona;
+    }
+
+
+
+
+
+
     //<editor-fold desc="Getters">
     public String getDocumento() {
         return documento;
@@ -64,9 +82,7 @@ public class Reclamo {
     public String getDescripcion(){
         return descripcion;
     }
-    public int getIdentificador() {
-        return identificador;
-    }
+
     //</editor-fold>
 
     //<editor-fold desc="Setters">
@@ -86,5 +102,5 @@ public class Reclamo {
         identificador = id;
     }
     //</editor-fold>
-*/
+
 }

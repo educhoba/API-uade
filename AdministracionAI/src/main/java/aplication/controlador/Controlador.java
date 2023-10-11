@@ -179,7 +179,7 @@ public class Controlador {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
 		Persona persona = buscarPersona(documento);
 		Reclamo reclamo = new Reclamo(persona, edificio, ubicacion, descripcion, unidad);
-		return reclamo.getNumero();
+		return reclamo.getIdentificador();
 	}
 	
 	public void agregarImagenAReclamo(Long numero, String direccion, String tipo) throws ReclamoException {
