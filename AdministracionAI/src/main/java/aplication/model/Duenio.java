@@ -31,6 +31,15 @@ public class Duenio {
 
     }
 
+    public Persona getPersona() {
+        return this.persona;
+    }
+
+    public Unidad getUnidad() {
+        return this.unidad;
+    }
+
+
     public int getId() {
         return id;
     }

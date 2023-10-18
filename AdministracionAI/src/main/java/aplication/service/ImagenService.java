@@ -24,8 +24,11 @@ public class ImagenService implements IService<Imagen, Imagen> {
     }
 
     @Override
-    public Imagen guardar(Imagen entity) {
-        return iRepository.save(entity);
+    public Imagen guardar(Imagen imagen) {
+        if( imagen.getPath() == null || imagen.getIdReclamo()==null || imagen.getTipo()==null) {
+            return null;
+        }
+        return iRepository.save(imagen);
     }
 
     @Override

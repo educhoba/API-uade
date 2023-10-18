@@ -1,12 +1,11 @@
 package aplication.controlador;
 
 import aplication.model.Imagen;
+import aplication.model.Reclamo;
 import aplication.service.ImagenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import aplication.model.Imagen;
 
 import java.util.List;
@@ -29,6 +28,12 @@ public class ImagenController {
     public ResponseEntity<List<Imagen>> listar() {
         return ResponseEntity.ok(imagenService.listar());
     }
+
+    @PostMapping
+    public Imagen cargarImagen(@RequestBody Imagen imagen) {
+        return imagenService.guardar(imagen);
+    }
+
 
 }
 

@@ -34,6 +34,7 @@ public class ReclamoService implements IService<Reclamo, Reclamo> {
         return iRepository.save(entity);
     }
 
+
     @Override
     public Reclamo buscarPorId(Long id) {
         Optional<Reclamo> ret = iRepository.findById(id);

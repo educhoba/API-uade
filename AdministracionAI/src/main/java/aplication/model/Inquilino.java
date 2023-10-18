@@ -29,6 +29,16 @@ public class Inquilino {
     public Inquilino(){
 
     }
+
+
+    public Persona getPersona() {
+        return this.persona;
+    }
+
+    public Unidad getUnidad() {
+        return this.unidad;
+    }
+
     public int getId() {
         return id;
     }

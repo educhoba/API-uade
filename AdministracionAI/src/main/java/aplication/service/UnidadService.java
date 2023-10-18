@@ -27,7 +27,9 @@ public class UnidadService implements IService<Unidad, Unidad> {
     @Override
     public Unidad guardar(Unidad entity) {
         return iRepository.save(entity);
+
     }
+
 
     @Override
     public Unidad buscarPorId(Long id) {

@@ -6,10 +6,7 @@ import aplication.service.ReclamoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -69,6 +66,32 @@ public class ReclamoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
         return ResponseEntity.status(HttpStatus.OK).body(persona);
+    }
+/*
+    @PostMapping
+    public ResponseEntity<?> cargarReclamo() {
+        Club club = clubService.buscar(idClub);
+        Beneficio beneficio = beneficioService.buscar(idBeneficio);
+
+        if (club != null && beneficio != null) {
+            List<Beneficio> beneficios = club.getBeneficios();
+
+            if (!beneficios.contains(club)) {
+                beneficios.add(beneficio);
+                beneficio.getClubes().add(club);
+                beneficioService.save(beneficio);  // Guardar el beneficio para actualizar la asociación
+                clubService.save(club);  // Guardar la club para actualizar la asociación
+            }
+
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+*/
+    @PostMapping
+    public Reclamo cargarReclamo(@RequestBody Reclamo reclamo) {
+        return reclamoService.guardar(reclamo);
     }
 
 

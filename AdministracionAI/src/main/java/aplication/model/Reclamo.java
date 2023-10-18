@@ -39,7 +39,7 @@ public class Reclamo {
     private Persona persona;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "identificador", referencedColumnName = "identificador", insertable = false, updatable = false)
     private Unidad unidad;
 
@@ -76,6 +76,13 @@ public class Reclamo {
     public Persona getPersona() {
         return this.persona;
     }
+
+    public Unidad getUnidad() {
+        return this.unidad;
+    }
+
+
+
 
 
 

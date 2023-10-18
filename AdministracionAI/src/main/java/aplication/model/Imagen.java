@@ -33,6 +33,13 @@ public class Imagen {
 
     }
 
+
+    public Reclamo getReclamo() {
+        return this.reclamo;
+    }
+
+
+
     //<editor-fold desc="Getters">
     public Integer getNumero(){
         return numero;
