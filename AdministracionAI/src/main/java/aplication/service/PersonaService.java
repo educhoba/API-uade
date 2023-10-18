@@ -4,6 +4,7 @@ import aplication.exceptions.PersonaException;
 import aplication.model.Duenio;
 import aplication.model.Inquilino;
 import aplication.model.Persona;
+import aplication.model.Unidad;
 import aplication.repository.IDuenioRepository;
 import aplication.repository.IInquilinoRepositoy;
 import aplication.repository.IPersonaRepository;
@@ -45,11 +46,19 @@ public class PersonaService implements IService<Persona, Persona> {
         return iRepository.save(entity);
     }
 
+
+    public Persona buscarPorDocumento(String id) {
+        Optional<Persona> ret = iRepository.findByDocumento(id);
+        return ret.orElse(null);
+    }
+
     @Override
     public Persona buscarPorId(Long id) {
         Optional<Persona> ret = iRepository.findById(id);
         return ret.orElse(null);
     }
+
+
 
     @Override
     public void eliminarPorId(Long id) {

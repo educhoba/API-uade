@@ -16,7 +16,19 @@ public class Inquilino {
     @Column(name = "documento", length = 20, nullable = false)
     private String documento;
 
+    @ManyToOne
+    @JoinColumn(name = "documento", referencedColumnName = "documento", insertable = false, updatable = false)
+    private Persona persona;
 
+    @ManyToOne
+    @JoinColumn(name = "identificador", referencedColumnName = "identificador", insertable = false, updatable = false)
+    private Unidad unidad;
+
+
+
+    public Inquilino(){
+
+    }
     public int getId() {
         return id;
     }

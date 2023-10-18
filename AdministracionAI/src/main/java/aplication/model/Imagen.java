@@ -25,11 +25,9 @@ public class Imagen {
     private Reclamo reclamo;
 
 
-    /*
-        @ManyToOne
-       @JoinColumn(name = "idReclamo",referencedColumnName = "idReclamo")
-       private Reclamo reclamo;
-       */
+
+
+
 
     public Imagen(){
 

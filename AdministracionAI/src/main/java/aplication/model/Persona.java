@@ -1,7 +1,10 @@
 package aplication.model;
 
 import aplication.views.PersonaView;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name="personas")
@@ -19,20 +22,29 @@ public class Persona {
     @Column(name = "contrasenia", length = 100)
     private String contrasenia;
 
-    /*
-     @OneToOne
-    @JoinColumn(name = "documento",referencedColumnName = "documento")
-    private Persona personas;
-    */
+    @OneToMany(mappedBy = "persona")
+    @JsonIgnore
+    private List<Duenio> duenios;
+
+    @OneToMany(mappedBy = "persona")
+    @JsonIgnore
+    private List<Inquilino> inquilinos;
+
+
+
+
+
+    public Persona(){
+
+    }
+
     public Persona(String documento, String nombre, String mail, String contrasenia){
         this.documento= documento;
         this.nombre= nombre;
         this.mail= mail;
         this.contrasenia= contrasenia;
     }
-    public Persona(){
 
-    }
     //<editor-fold desc="Getters">
     public String getDocumento(){
         return documento;

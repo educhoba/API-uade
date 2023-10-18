@@ -10,6 +10,7 @@ public interface IService<T, R> {
 
     T buscarPorId(Long id);
 
+
     void eliminarPorId(Long id);
 
     void eliminar(R entity);

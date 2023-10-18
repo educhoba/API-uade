@@ -1,7 +1,9 @@
 package aplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,6 +21,14 @@ public class Edificio {
 
     @Column(name = "direccion", length = 100, nullable = false)
     private String direccion;
+
+    @OneToMany(mappedBy = "edificio")
+    @JsonIgnore
+    private List<Reclamo> reclamos;
+
+    @OneToMany(mappedBy = "edificio")
+    @JsonIgnore
+    private List<Unidad> unidades;
 
 
 

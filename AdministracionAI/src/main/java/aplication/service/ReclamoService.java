@@ -1,5 +1,6 @@
 package aplication.service;
 
+import aplication.model.Persona;
 import aplication.model.Reclamo;
 import aplication.model.Unidad;
 import aplication.repository.IPersonaRepository;

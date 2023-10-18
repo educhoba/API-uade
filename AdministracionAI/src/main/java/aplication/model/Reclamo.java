@@ -1,7 +1,10 @@
 package aplication.model;
 
 import aplication.views.Estado;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name="reclamos")
@@ -36,14 +39,24 @@ public class Reclamo {
     private Persona persona;
 
 
+    @ManyToOne
+    @JoinColumn(name = "identificador", referencedColumnName = "identificador", insertable = false, updatable = false)
+    private Unidad unidad;
+
+
+    @OneToMany(mappedBy = "reclamo")
+    @JsonIgnore
+    private List<Imagen> imagens;
+
+
+    public Reclamo() {
+
+    }
 
     public Reclamo(Persona persona, Edificio edificio, String ubicacion, String descripcion, Unidad unidad){
 
     }
 
-    public Reclamo() {
-
-    }
 
     public int getIdentificador() {
         return this.identificador;

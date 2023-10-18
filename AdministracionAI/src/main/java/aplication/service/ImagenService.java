@@ -43,4 +43,7 @@ public class ImagenService implements IService<Imagen, Imagen> {
     public void eliminar(Imagen entity) {
         iRepository.delete(entity);
     }
+
+
+
 }

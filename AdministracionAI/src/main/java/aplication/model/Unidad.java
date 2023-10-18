@@ -1,6 +1,7 @@
 package aplication.model;
 
 import aplication.views.UnidadView;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -20,6 +21,22 @@ public class Unidad {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "codigoEdificio", referencedColumnName = "codigo", insertable = false, updatable = false)
     private Edificio edificio;
+
+
+    @OneToMany(mappedBy = "unidad")
+    @JsonIgnore
+    private List<Reclamo> reclamos;
+
+    @OneToMany(mappedBy = "unidad")
+    @JsonIgnore
+    private List<Inquilino> inquilinos;
+
+    @OneToMany(mappedBy = "unidad")
+    @JsonIgnore
+    private List<Duenio> duenios;
+
+
+
 
     public Unidad() {
 
