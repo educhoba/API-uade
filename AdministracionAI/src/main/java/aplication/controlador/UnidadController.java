@@ -1,5 +1,6 @@
 package aplication.controlador;
 
+import aplication.exceptions.UnidadException;
 import aplication.model.Edificio;
 import aplication.model.Persona;
 import aplication.model.Unidad;
@@ -83,6 +84,17 @@ public class UnidadController {
                 meetingRepository.findByMeetingId(meetingId)
                         .orElseThrow(() -> new MeetingDoesNotExistException(meetingId));
                         */
+    }
+    @PostMapping("/liberarUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}")
+    public ResponseEntity<Unidad> liberarUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero){
+        Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
+        return null;
+    }
+    @PostMapping("/habitarUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}")
+    public ResponseEntity<Unidad> habitarUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero){
+        Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
+        //todo
+        return null;
     }
 
 }

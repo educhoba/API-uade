@@ -49,50 +49,51 @@ public class Controlador {
 		return instancia;
 	}
 
+	//<editor-fold desc="cruzadas">
 	public void transferirUnidad(Long codigo, String piso, String numero, String documento) throws UnidadException, PersonaException {
-		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		Persona persona = buscarPersona(documento);
-		unidad.transferir(persona);
+		//Unidad unidad = buscarUnidad(codigo, piso, numero);
+		//Persona persona = buscarPersona(documento);
+		//unidad.transferir(persona);
 	}
 
 	public void agregarDuenioUnidad(Long codigo, String piso, String numero, String documento) throws UnidadException, PersonaException {
-		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		Persona persona = buscarPersona(documento);
-		unidad.agregarDuenio(persona);
+		//Unidad unidad = buscarUnidad(codigo, piso, numero);
+		//Persona persona = buscarPersona(documento);
+		//unidad.agregarDuenio(persona);
 	}
 
 	public void alquilarUnidad(Long codigo, String piso, String numero, String documento) throws UnidadException, PersonaException{
-		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		Persona persona = buscarPersona(documento);
-		unidad.alquilar(persona);
+		//Unidad unidad = buscarUnidad(codigo, piso, numero);
+		//Persona persona = buscarPersona(documento);
+		//unidad.alquilar(persona);
 	}
 
 	public void agregarInquilinoUnidad(Long codigo, String piso, String numero, String documento) throws UnidadException, PersonaException{
-		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		Persona persona = buscarPersona(documento);
-		unidad.agregarInquilino(persona);
+		//Unidad unidad = buscarUnidad(codigo, piso, numero);
+		//Persona persona = buscarPersona(documento);
+		//unidad.agregarInquilino(persona);
 	}
 
-	public void liberarUnidad(Long codigo, String piso, String numero) throws UnidadException {
-		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		unidad.liberar();
+	public int agregarReclamo(Long codigo, String piso, String numero, String documento, String ubicacion, String descripcion){
+		//Edificio edificio = buscarEdificio(codigo);
+		//Unidad unidad = buscarUnidad(codigo, piso, numero);
+		//Persona persona = buscarPersona(documento);
+		//Reclamo reclamo = new Reclamo(persona, edificio, ubicacion, descripcion, unidad);
+		//return reclamo.getIdentificador();
+		return 0;
 	}
-	
-	public void habitarUnidad(Long codigo, String piso, String numero) throws UnidadException {
-		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		unidad.habitar();;
-	}
-	
+	//</editor-fold>
+
+
 	public void agregarPersona(String documento, String nombre) {
 		Persona persona = new Persona(documento, nombre, null, null);
 		//guardar el objeto
 	}
-	
+
 	public void eliminarPersona(String documento) throws PersonaException {
-		Persona persona = buscarPersona(documento);
+		//Persona persona = buscarPersona(documento);
 		//eliminar el objeto
 	}
-	
 	public List<ReclamoView> reclamosPorEdificio(int codigo){
 		List<ReclamoView> resultado = new ArrayList<ReclamoView>();
 		return resultado;
@@ -112,15 +113,7 @@ public class Controlador {
 		List<ReclamoView> resultado = new ArrayList<ReclamoView>();
 		return resultado;
 	}
- 
-	public int agregarReclamo(Long codigo, String piso, String numero, String documento, String ubicacion, String descripcion) throws EdificioException, UnidadException, PersonaException {
-		Edificio edificio = buscarEdificio(codigo);
-		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		Persona persona = buscarPersona(documento);
-		Reclamo reclamo = new Reclamo(persona, edificio, ubicacion, descripcion, unidad);
-		return reclamo.getIdentificador();
-	}
-	
+
 	public void agregarImagenAReclamo(Long numero, String direccion, String tipo) throws ReclamoException {
 		Reclamo reclamo = buscarReclamo(numero);
 		reclamo.agregarImagen(direccion, tipo);
@@ -130,19 +123,7 @@ public class Controlador {
 		Reclamo reclamo = buscarReclamo(numero);
 		reclamo.cambiarEstado(estado);
 	}
-	
-	private Edificio buscarEdificio(Long codigo) throws EdificioException {
-		return ediSvc.buscarPorCodigo(codigo);
-	}
 
-	private Unidad buscarUnidad(Long codigo, String piso, String numero) throws UnidadException{
-		return null;
-	}	
-	
-	private Persona buscarPersona(String documento) throws PersonaException, PersonaException {
-		return perSvc.buscarPersona(documento);
-	}
-	
 	private Reclamo buscarReclamo(Long numero) throws ReclamoException {
 		return null;
 	}

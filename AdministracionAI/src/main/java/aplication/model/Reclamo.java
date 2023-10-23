@@ -57,7 +57,6 @@ public class Reclamo {
 
     }
 
-
     public int getIdentificador() {
         return this.identificador;
     }
