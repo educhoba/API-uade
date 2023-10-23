@@ -37,7 +37,7 @@ public class DuenioService implements IService<Duenio,Duenio>{
     }
 
     @Override
-    public Duenio buscarPorId(Long id) {
+    public Duenio buscarPorCodigo(Long id) {
         Optional<Duenio> ret = iRepository.findById(id);
         return ret.orElse(null);
     }

@@ -8,7 +8,7 @@ public interface IService<T, R> {
 
     T guardar(R entity);
 
-    T buscarPorId(Long id);
+    T buscarPorCodigo(Long id);
 
 
     void eliminarPorId(Long id);

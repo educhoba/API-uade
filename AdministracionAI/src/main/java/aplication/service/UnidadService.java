@@ -32,7 +32,7 @@ public class UnidadService implements IService<Unidad, Unidad> {
 
 
     @Override
-    public Unidad buscarPorId(Long id) {
+    public Unidad buscarPorCodigo(Long id) {
         Optional<Unidad> ret = iRepository.findById(id);
         return ret.orElse(null);
     }

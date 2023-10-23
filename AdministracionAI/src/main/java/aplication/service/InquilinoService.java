@@ -32,7 +32,7 @@ public class InquilinoService implements IService<Inquilino,Inquilino> {
     }
 
     @Override
-    public Inquilino buscarPorId(Long id) {
+    public Inquilino buscarPorCodigo(Long id) {
         Optional<Inquilino> ret = iRepository.findById(id);
         return ret.orElse(null);
     }

@@ -12,7 +12,6 @@ import aplication.model.Unidad;
 import aplication.service.*;
 import aplication.views.*;
 import aplication.exceptions.EdificioException;
-import aplication.exceptions.PersonaException;
 import aplication.exceptions.ReclamoException;
 import aplication.exceptions.UnidadException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,19 +48,8 @@ public class Controlador {
 			instancia = new Controlador();
 		return instancia;
 	}
-	
-	public List<EdificioView> getEdificios(){
-		return null;
-	}
 
-	public List<UnidadView> getUnidadesPorEdificio(Long codigo) throws EdificioException{
-		List<UnidadView> resultado = new ArrayList<UnidadView>();
-		Edificio edificio = buscarEdificio(codigo);
-		List<Unidad> unidades = ediSvc.getUnidades();
-		for(Unidad unidad : unidades)
-			resultado.add(unidad.toView());
-		return resultado;
-	}
+
 	
 	public List<PersonaView> habilitadosPorEdificio(Long codigo) throws EdificioException{
 		List<PersonaView> resultado = new ArrayList<PersonaView>();
@@ -193,7 +181,7 @@ public class Controlador {
 	}
 	
 	private Edificio buscarEdificio(Long codigo) throws EdificioException {
-		return ediSvc.buscarPorId(codigo);
+		return ediSvc.buscarPorCodigo(codigo);
 	}
 
 	private Unidad buscarUnidad(Long codigo, String piso, String numero) throws UnidadException{

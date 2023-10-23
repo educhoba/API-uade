@@ -31,8 +31,8 @@ public class EdificioService implements IService<Edificio,Edificio> {
     }
 
     @Override
-    public Edificio buscarPorId(Long id) {
-        Optional<Edificio> ret = iRepository.findById(id);
+    public Edificio buscarPorCodigo(Long codigo) {
+        Optional<Edificio> ret = iRepository.findById(codigo);
         return ret.orElse(null);
     }
 
@@ -45,7 +45,6 @@ public class EdificioService implements IService<Edificio,Edificio> {
     public void eliminar(Edificio entity) {
         iRepository.delete(entity);
     }
-
 
     public List<Unidad> getUnidades() {
         return null; //todo

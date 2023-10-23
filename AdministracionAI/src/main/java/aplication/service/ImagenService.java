@@ -32,7 +32,7 @@ public class ImagenService implements IService<Imagen, Imagen> {
     }
 
     @Override
-    public Imagen buscarPorId(Long id) {
+    public Imagen buscarPorCodigo(Long id) {
         Optional<Imagen> ret = iRepository.findById(id);
         return ret.orElse(null);
     }

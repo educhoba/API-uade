@@ -1,8 +1,6 @@
 package aplication.controlador;
 
-import aplication.exceptions.UnidadException;
 import aplication.model.Edificio;
-import aplication.model.Persona;
 import aplication.model.Unidad;
 import aplication.service.UnidadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +30,7 @@ public class UnidadController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Unidad> buscar(@PathVariable Long id) {
-        Unidad unidad = unidadService.buscarPorId(id);
+        Unidad unidad = unidadService.buscarPorCodigo(id);
         if (unidad == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
@@ -42,7 +40,7 @@ public class UnidadController {
 
     @GetMapping("/edificioByIdUnidad/{codigo}")
     public ResponseEntity<Edificio> edificioPorUnidad(@PathVariable Long codigo)  {
-        Unidad unidad = unidadService.buscarPorId(codigo);
+        Unidad unidad = unidadService.buscarPorCodigo(codigo);
 
         if (unidad == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

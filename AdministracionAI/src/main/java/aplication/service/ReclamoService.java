@@ -36,7 +36,7 @@ public class ReclamoService implements IService<Reclamo, Reclamo> {
 
 
     @Override
-    public Reclamo buscarPorId(Long id) {
+    public Reclamo buscarPorCodigo(Long id) {
         Optional<Reclamo> ret = iRepository.findById(id);
         return ret.orElse(null);
     }

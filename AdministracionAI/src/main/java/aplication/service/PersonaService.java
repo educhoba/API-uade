@@ -53,7 +53,7 @@ public class PersonaService implements IService<Persona, Persona> {
     }
 
     @Override
-    public Persona buscarPorId(Long id) {
+    public Persona buscarPorCodigo(Long id) {
         Optional<Persona> ret = iRepository.findById(id);
         return ret.orElse(null);
     }

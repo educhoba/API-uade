@@ -1,25 +1,21 @@
 
 package aplication.controlador;
 
-import aplication.model.Duenio;
-import aplication.model.Edificio;
-import aplication.model.Inquilino;
+import aplication.model.*;
 import aplication.service.EdificioService;
+import aplication.views.UnidadView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import aplication.model.Imagen;
+import aplication.model.Unidad;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import aplication.service.*;
 
 @RestController
 @RequestMapping("/edificios")
 public class EdificioController {
-
-
 
     // DuenioService duenioService;
     @Autowired
@@ -34,7 +30,7 @@ public class EdificioController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Edificio> buscar(@PathVariable Long id) {
-        Edificio edificio = edificioService.buscarPorId(id);
+        Edificio edificio = edificioService.buscarPorCodigo(id);
         if (edificio == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
@@ -47,5 +43,12 @@ public class EdificioController {
         return edificioService.guardar(edificio);
     }
 
+    @GetMapping("/unidadesByIdEdificio/{codigo}")
+    public ResponseEntity<List<Unidad>> getUnidadesPorEdificio(@PathVariable Long codigo){
+
+        Edificio edificio = edificioService.buscarPorCodigo(codigo);
+        List<Unidad> unidades = edificio.getUnidades();
+        return ResponseEntity.ok(unidades);
+    }
 }
 

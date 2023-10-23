@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import aplication.service.*;
-
 @RestController
 @RequestMapping("/reclamos")
 public class ReclamoController {
@@ -32,7 +30,7 @@ public class ReclamoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Reclamo> buscar(@PathVariable Long id) {
-        Reclamo reclamo = reclamoService.buscarPorId(id);
+        Reclamo reclamo = reclamoService.buscarPorCodigo(id);
         if (reclamo == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
@@ -42,7 +40,7 @@ public class ReclamoController {
 
     @GetMapping("/edificioByIdReclamo/{codigo}")
     public ResponseEntity<Edificio> edificioByReclamo(@PathVariable Long codigo)  {
-        Reclamo reclamo = reclamoService.buscarPorId(codigo);
+        Reclamo reclamo = reclamoService.buscarPorCodigo(codigo);
 
         if (reclamo == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -56,7 +54,7 @@ public class ReclamoController {
 
     @GetMapping("/personaByIdReclamo/{codigo}")
     public ResponseEntity<Persona> personaByReclamo(@PathVariable Long codigo)  {
-        Reclamo reclamo = reclamoService.buscarPorId(codigo);
+        Reclamo reclamo = reclamoService.buscarPorCodigo(codigo);
 
         if (reclamo == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

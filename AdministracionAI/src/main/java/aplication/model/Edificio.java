@@ -14,8 +14,6 @@ public class Edificio {
     @Column(name = "codigo")
     private Integer codigo;
 
-
-
     @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
 
@@ -26,10 +24,14 @@ public class Edificio {
     @JsonIgnore
     private List<Reclamo> reclamos;
 
+
+   // @JsonIgnore
+   //@OneToMany(mappedBy = "edificio")
+    //@JoinColumn(name = "codigoEdificio", referencedColumnName = "codigo", insertable = false, updatable = false)
     @OneToMany(mappedBy = "edificio")
+    //@JoinColumn(name="codigoEdificio")
     @JsonIgnore
     private List<Unidad> unidades;
-
 
 
     public Edificio(){
@@ -52,6 +54,9 @@ public class Edificio {
     public String getDireccion(){
         return this.direccion;
     }
+    public List<Unidad> getUnidades(){
+        return this.unidades;
+    }
     //</editor-fold>
 
     //<editor-fold desc="Setters">
@@ -59,8 +64,6 @@ public class Edificio {
     public void setNombre(String nombre){
         this.nombre = nombre;
     }
-
-
 
     public void setDireccion(String desc){
         direccion = desc;

@@ -62,7 +62,6 @@ public class Unidad {
         return;
     }
 
-
     public String getHabitado(){return this.habitado;}
     public void setHabitado(String habitadoNuevo) {
         this.habitado=habitadoNuevo;
