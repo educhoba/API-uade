@@ -49,22 +49,6 @@ public class Controlador {
 		return instancia;
 	}
 
-	public List<PersonaView> dueniosPorEdificio(Long codigo) throws EdificioException{
-		List<PersonaView> resultado = new ArrayList<PersonaView>();
-		Edificio edificio = buscarEdificio(codigo);
-		List<Persona> duenios = edificio.duenios();
-		for(Persona persona : duenios)
-			resultado.add(persona.toView());
-		return resultado;
-	}
-
-
-	@GetMapping
-	public ResponseEntity<List<Edificio>> listar() {
-		return ResponseEntity.ok(edificioService.listar());
-	}
-
-
 	public void transferirUnidad(Long codigo, String piso, String numero, String documento) throws UnidadException, PersonaException {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
 		Persona persona = buscarPersona(documento);

@@ -1,17 +1,14 @@
 package aplication.controlador;
 
-import aplication.exceptions.UnidadException;
 import aplication.model.Edificio;
 import aplication.model.Persona;
 import aplication.model.Unidad;
 import aplication.service.UnidadService;
-import aplication.views.PersonaView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,7 +28,6 @@ public class UnidadController {
         return ResponseEntity.ok(unidadService.listar());
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<Unidad> buscar(@PathVariable Long id) {
         Unidad unidad = unidadService.buscarPorCodigo(id);
@@ -40,8 +36,12 @@ public class UnidadController {
 
         return ResponseEntity.ok(unidad);
     }
-
-
+    @GetMapping("/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}")
+    public ResponseEntity<Unidad> buscarPorEdificioPisoNumero(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero){
+        //List<PersonaView> resultado = new ArrayList<PersonaView>();
+        Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
+        return ResponseEntity.ok(unidad);
+    }
     @GetMapping("/edificioByIdUnidad/{codigo}")
     public ResponseEntity<Edificio> edificioPorUnidad(@PathVariable Long codigo)  {
         Unidad unidad = unidadService.buscarPorCodigo(codigo);
@@ -66,9 +66,9 @@ public class UnidadController {
         return ResponseEntity.ok(inquilinos);
     }
     @GetMapping("/inquilinosByEdificioAndPisoAndNumeroUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}")
-    public ResponseEntity<List<Persona>> inquilinosPorPisoNumero(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero){
+    public ResponseEntity<List<Persona>> inquilinosPorEdificioPisoNumero(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero){
         //List<PersonaView> resultado = new ArrayList<PersonaView>();
-        Unidad unidad = unidadService.buscarPorPisoNumero(codigoEdificio,piso,numero);
+        Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
         List<Persona> inquilinos = unidad.getInquilinos();
         //for(Persona persona : inquilinos)
         //    resultado.add(persona.toView());

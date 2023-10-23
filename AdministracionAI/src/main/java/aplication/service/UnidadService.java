@@ -35,7 +35,7 @@ public class UnidadService implements IService<Unidad, Unidad> {
         return ret.orElse(null);
     }
 
-    public Unidad buscarPorPisoNumero(Integer codigoEdificio, String piso,String numero) {
+    public Unidad buscarPorEdificioPisoNumero(Integer codigoEdificio, String piso, String numero) {
         Optional<Unidad> ret = iRepository.findByCodigoEdificioAndPisoAndNumero(codigoEdificio,piso,numero);
         return ret.orElse(null);
     }
