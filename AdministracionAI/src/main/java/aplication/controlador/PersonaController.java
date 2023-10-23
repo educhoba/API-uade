@@ -33,7 +33,7 @@ public class PersonaController {
     @GetMapping("/{documento}")
     public ResponseEntity<Persona> buscar(@PathVariable String documento) {
         Persona persona = personaService.buscarPorDocumento(documento);
-        if (persona == null)
+        if (persona == null || persona.getDocumento() == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
         return ResponseEntity.ok(persona);

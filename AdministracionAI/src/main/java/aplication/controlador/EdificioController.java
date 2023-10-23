@@ -1,8 +1,10 @@
 
 package aplication.controlador;
 
+import aplication.exceptions.EdificioException;
 import aplication.model.*;
 import aplication.service.EdificioService;
+import aplication.views.PersonaView;
 import aplication.views.UnidadView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import aplication.model.Unidad;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/edificios")
@@ -43,6 +46,7 @@ public class EdificioController {
         return edificioService.guardar(edificio);
     }
 
+    //trae todas las unidades del edificio
     @GetMapping("/unidadesByIdEdificio/{codigo}")
     public ResponseEntity<List<Unidad>> getUnidadesPorEdificio(@PathVariable Long codigo){
 
@@ -50,5 +54,19 @@ public class EdificioController {
         List<Unidad> unidades = edificio.getUnidades();
         return ResponseEntity.ok(unidades);
     }
+
+    //trae todos los duenios e inquilinos del edificio
+    @GetMapping("/habilitadosByIdEdificio/{codigo}")
+    public ResponseEntity<List<Persona>> habilitadosPorEdificio(@PathVariable Long codigo){
+        //List<PersonaView> resultado = new ArrayList<PersonaView>();
+        Edificio edificio = edificioService.buscarPorCodigo(codigo);
+        List<Persona> habilitados = edificio.habilitados();
+
+        //for(Persona persona : habilitados)
+        //    resultado.add(persona.toView());
+
+        return ResponseEntity.ok(habilitados);
+    }
 }
+
 

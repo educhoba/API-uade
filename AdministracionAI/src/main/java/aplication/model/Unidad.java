@@ -4,6 +4,7 @@ import aplication.views.UnidadView;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -80,11 +81,21 @@ public class Unidad {
     }
 
     public List<Persona> getDuenios() {
-        return null; //todo
+        List<Persona> resultado = new ArrayList<Persona>();
+        for (Duenio d : this.duenios) {
+            if(d != null)
+                resultado.add(d.getPersona());
+        }
+        return resultado;
     }
 
     public List<Persona> getInquilinos() {
-        return null; //todo
+        List<Persona> resultado = new ArrayList<Persona>();
+        for (Inquilino i : this.inquilinos) {
+            if(i != null)
+                resultado.add(i.getPersona());
+        }
+        return resultado;
     }
 
     public void transferir(Persona persona) {

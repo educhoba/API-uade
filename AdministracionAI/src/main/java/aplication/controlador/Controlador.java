@@ -50,20 +50,11 @@ public class Controlador {
 	}
 
 
-	
-	public List<PersonaView> habilitadosPorEdificio(Long codigo) throws EdificioException{
-		List<PersonaView> resultado = new ArrayList<PersonaView>();
-		Edificio edificio = buscarEdificio(codigo);
-		Set<Persona> habilitados = edificio.habilitados();
-		for(Persona persona : habilitados)
-			resultado.add(persona.toView());
-		return resultado;
-	}
 
 	public List<PersonaView> dueniosPorEdificio(Long codigo) throws EdificioException{
 		List<PersonaView> resultado = new ArrayList<PersonaView>();
 		Edificio edificio = buscarEdificio(codigo);
-		Set<Persona> duenios = edificio.duenios();
+		List<Persona> duenios = edificio.duenios();
 		for(Persona persona : duenios)
 			resultado.add(persona.toView());
 		return resultado;
@@ -81,7 +72,7 @@ public class Controlador {
 	public List<PersonaView> habitantesPorEdificio(Long codigo) throws EdificioException{
 		List<PersonaView> resultado = new ArrayList<PersonaView>();
 		Edificio edificio = buscarEdificio(codigo);
-		Set<Persona> habitantes = edificio.duenios();
+		List<Persona> habitantes = edificio.duenios();
 		for(Persona persona : habitantes)
 			resultado.add(persona.toView());
 		return resultado;

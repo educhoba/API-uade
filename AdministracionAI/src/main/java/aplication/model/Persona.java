@@ -30,10 +30,6 @@ public class Persona {
     @JsonIgnore
     private List<Inquilino> inquilinos;
 
-
-
-
-
     public Persona(){
 
     }

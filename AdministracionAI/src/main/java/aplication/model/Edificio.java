@@ -3,8 +3,7 @@ package aplication.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name="edificios")
@@ -69,14 +68,35 @@ public class Edificio {
         direccion = desc;
     }
 
-    public Set<Persona> habilitados() {
-        return null;
-        //todo
+    public List<Persona> habilitados() {
+        List<Persona> resultado = new ArrayList<Persona>();
+        List<Unidad> unidades = this.unidades;
+
+        List<Persona> duenioAux = new ArrayList<Persona>();
+        List<Persona> inqAux = new ArrayList<Persona>();
+        for (Unidad u : unidades) {
+            duenioAux = u.getDuenios();
+            if(duenioAux != null)
+                resultado.addAll(duenioAux);
+            inqAux = u.getInquilinos();
+            if(inqAux != null)
+                resultado.addAll(inqAux);
+        }
+        return resultado;
     }
 
-    public Set<Persona> duenios() {
-        return null;
-        //todo
+    public List<Persona> duenios() {
+        List<Persona> resultado = new ArrayList<Persona>();
+        List<Unidad> unidades = this.unidades;
+
+        List<Persona> duenioAux = new ArrayList<Persona>();
+        for (Unidad u : unidades) {
+            duenioAux = u.getDuenios();
+            if(duenioAux != null)
+                resultado.addAll(duenioAux);
+        }
+        return resultado;
     }
+
     //</editor-fold>
 }

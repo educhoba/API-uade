@@ -57,9 +57,6 @@ public class PersonaService implements IService<Persona, Persona> {
         Optional<Persona> ret = iRepository.findById(id);
         return ret.orElse(null);
     }
-
-
-
     @Override
     public void eliminarPorId(Long id) {
     iRepository.deleteById(id);
