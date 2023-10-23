@@ -1,13 +1,17 @@
 package aplication.controlador;
 
+import aplication.exceptions.UnidadException;
 import aplication.model.Edificio;
+import aplication.model.Persona;
 import aplication.model.Unidad;
 import aplication.service.UnidadService;
+import aplication.views.PersonaView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -52,6 +56,24 @@ public class UnidadController {
         return ResponseEntity.status(HttpStatus.OK).body(edificio);
     }
 
+    @GetMapping("/inquilinosByIdUnidad/{codigo}")
+    public ResponseEntity<List<Persona>> inquilinosPorUnidad(@PathVariable Long codigo){
+        //List<PersonaView> resultado = new ArrayList<PersonaView>();
+        Unidad unidad = unidadService.buscarPorCodigo(codigo);
+        List<Persona> inquilinos = unidad.getInquilinos();
+        //for(Persona persona : inquilinos)
+        //    resultado.add(persona.toView());
+        return ResponseEntity.ok(inquilinos);
+    }
+    @GetMapping("/inquilinosByEdificioAndPisoAndNumeroUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}")
+    public ResponseEntity<List<Persona>> inquilinosPorPisoNumero(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero){
+        //List<PersonaView> resultado = new ArrayList<PersonaView>();
+        Unidad unidad = unidadService.buscarPorPisoNumero(codigoEdificio,piso,numero);
+        List<Persona> inquilinos = unidad.getInquilinos();
+        //for(Persona persona : inquilinos)
+        //    resultado.add(persona.toView());
+        return ResponseEntity.ok(inquilinos);
+    }
 
     @PostMapping
     public Unidad cargarUnidad(@RequestBody Unidad unidad) {
@@ -62,4 +84,5 @@ public class UnidadController {
                         .orElseThrow(() -> new MeetingDoesNotExistException(meetingId));
                         */
     }
+
 }

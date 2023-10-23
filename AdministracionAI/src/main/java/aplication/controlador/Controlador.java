@@ -65,14 +65,7 @@ public class Controlador {
 	}
 
 
-	public List<PersonaView> inquilinosPorUnidad(Long codigo, String piso, String numero) throws UnidadException{
-		List<PersonaView> resultado = new ArrayList<PersonaView>();
-		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		List<Persona> inquilinos = unidad.getInquilinos();
-		for(Persona persona : inquilinos)
-			resultado.add(persona.toView());
-		return resultado;
-	}
+
 	
 	public void transferirUnidad(Long codigo, String piso, String numero, String documento) throws UnidadException, PersonaException {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);

@@ -1,7 +1,5 @@
 package aplication.service;
 
-import aplication.model.Edificio;
-import aplication.repository.IReclamoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +32,11 @@ public class UnidadService implements IService<Unidad, Unidad> {
     @Override
     public Unidad buscarPorCodigo(Long id) {
         Optional<Unidad> ret = iRepository.findById(id);
+        return ret.orElse(null);
+    }
+
+    public Unidad buscarPorPisoNumero(Integer codigoEdificio, String piso,String numero) {
+        Optional<Unidad> ret = iRepository.findByCodigoEdificioAndPisoAndNumero(codigoEdificio,piso,numero);
         return ret.orElse(null);
     }
 /*

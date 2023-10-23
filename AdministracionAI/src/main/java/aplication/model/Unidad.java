@@ -18,6 +18,7 @@ public class Unidad {
     private String piso;
     private String numero;
     private String habitado;
+    private Integer codigoEdificio;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "codigoEdificio", referencedColumnName = "codigo", insertable = false, updatable = false)
