@@ -67,6 +67,16 @@ public class EdificioController {
 
         return ResponseEntity.ok(habilitados);
     }
+    //trae todas las personas que tienen el flag de habitado e ignoro a los duenios si tiene inquilino
+    @GetMapping("/habitantesByIdEdificio/{codigo}")
+    public ResponseEntity<List<Persona>> habitantesPorEdificio(@PathVariable Long codigo){
+        //List<PersonaView> resultado = new ArrayList<PersonaView>();
+        Edificio edificio = edificioService.buscarPorCodigo(codigo);
+        List<Persona> habitantes = edificio.habitantes();
+        //for(Persona persona : habitantes)
+        //    resultado.add(persona.toView());
+        return ResponseEntity.ok(habitantes);
+    }
 }
 
 

@@ -49,8 +49,6 @@ public class Controlador {
 		return instancia;
 	}
 
-
-
 	public List<PersonaView> dueniosPorEdificio(Long codigo) throws EdificioException{
 		List<PersonaView> resultado = new ArrayList<PersonaView>();
 		Edificio edificio = buscarEdificio(codigo);
@@ -65,19 +63,6 @@ public class Controlador {
 	public ResponseEntity<List<Edificio>> listar() {
 		return ResponseEntity.ok(edificioService.listar());
 	}
-
-
-
-
-	public List<PersonaView> habitantesPorEdificio(Long codigo) throws EdificioException{
-		List<PersonaView> resultado = new ArrayList<PersonaView>();
-		Edificio edificio = buscarEdificio(codigo);
-		List<Persona> habitantes = edificio.duenios();
-		for(Persona persona : habitantes)
-			resultado.add(persona.toView());
-		return resultado;
-	}
-
 
 
 	public List<PersonaView> inquilinosPorUnidad(Long codigo, String piso, String numero) throws UnidadException{

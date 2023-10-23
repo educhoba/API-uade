@@ -97,6 +97,27 @@ public class Edificio {
         }
         return resultado;
     }
+    //si tiene inquilino ignoro al duenio como habitante
+    public List<Persona> habitantes() {
+        List<Persona> resultado = new ArrayList<Persona>();
+        List<Unidad> unidades = this.unidades;
+
+        List<Persona> duenioAux = new ArrayList<Persona>();
+        List<Persona> inqAux = new ArrayList<Persona>();
+        for (Unidad u : unidades) {
+            if(u.estaHabitada()){
+                inqAux = u.getInquilinos();
+                if(inqAux != null)
+                    resultado.addAll(inqAux);
+                else{
+                    duenioAux = u.getDuenios();
+                    if(duenioAux != null)
+                        resultado.addAll(duenioAux);
+                }
+            }
+        }
+        return resultado;
+    }
 
     //</editor-fold>
 }

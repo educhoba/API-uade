@@ -36,9 +36,6 @@ public class Unidad {
     @JsonIgnore
     private List<Duenio> duenios;
 
-
-
-
     public Unidad() {
 
     }
@@ -63,17 +60,12 @@ public class Unidad {
         return;
     }
 
-    public String getHabitado(){return this.habitado;}
-    public void setHabitado(String habitadoNuevo) {
+    private void setHabitado(String habitadoNuevo) {
         this.habitado=habitadoNuevo;
         return;
     }
 
     public String getNumero(){return this.numero;}
-    public void setNumero(String numeroNuevo) {
-        this.numero=numeroNuevo;
-        return;
-    }
 
 
     public UnidadView toView() {
@@ -115,10 +107,11 @@ public class Unidad {
     }
 
     public void liberar() {
-        //todo
+        this.setHabitado("N");
     }
 
     public void habitar() {
-        //todo
+        this.setHabitado("Y");
     }
+    public boolean estaHabitada(){return this.habitado == "Y";}
 }
