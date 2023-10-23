@@ -65,8 +65,6 @@ public class Controlador {
 	}
 
 
-
-	
 	public void transferirUnidad(Long codigo, String piso, String numero, String documento) throws UnidadException, PersonaException {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
 		Persona persona = buscarPersona(documento);

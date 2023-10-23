@@ -54,7 +54,18 @@ public class EdificioController {
         List<Unidad> unidades = edificio.getUnidades();
         return ResponseEntity.ok(unidades);
     }
+    //trae todos los duenios del edificio
+    @GetMapping("/dueniosByIdEdificio/{codigo}")
+    public ResponseEntity<List<Persona>> dueniosPorEdificio(@PathVariable Long codigo){
+        //List<PersonaView> resultado = new ArrayList<PersonaView>();
+        Edificio edificio = edificioService.buscarPorCodigo(codigo);
+        List<Persona> duenios = edificio.duenios();
 
+        //for(Persona persona : habilitados)
+        //    resultado.add(persona.toView());
+
+        return ResponseEntity.ok(duenios);
+    }
     //trae todos los duenios e inquilinos del edificio
     @GetMapping("/habilitadosByIdEdificio/{codigo}")
     public ResponseEntity<List<Persona>> habilitadosPorEdificio(@PathVariable Long codigo){
