@@ -1,6 +1,7 @@
 
 package aplication.controlador;
 
+import aplication.exceptions.PersonaException;
 import aplication.model.*;
 import aplication.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,6 @@ import aplication.service.*;
 @RequestMapping("/personas")
 public class PersonaController {
 
-
-
     // DuenioService duenioService;
     @Autowired
     private PersonaService personaService;
@@ -28,7 +27,6 @@ public class PersonaController {
     public ResponseEntity<List<Persona>> listar() {
         return ResponseEntity.ok(personaService.listar());
     }
-
 
     @GetMapping("/{documento}")
     public ResponseEntity<Persona> buscar(@PathVariable String documento) {
@@ -44,7 +42,18 @@ public class PersonaController {
         return personaService.guardar(persona);
     }
 
-
+    @PostMapping("/registrarUsuario/documento/{documento}/mail/{mail}/contrasenia/{contrasenia}")
+    public ResponseEntity<String> registrarUsuario(@PathVariable String documento, @PathVariable String mail, @PathVariable String contrasenia){
+        try{
+            personaService.registrarUsuario(documento,mail,contrasenia);
+        }
+        catch (PersonaException ex){
+            return ResponseEntity.badRequest()
+                    .body(ex.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("Usuario creado.");
+    }
 
 }
 

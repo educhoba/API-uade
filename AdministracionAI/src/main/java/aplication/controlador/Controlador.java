@@ -85,15 +85,6 @@ public class Controlador {
 	//</editor-fold>
 
 
-	public void agregarPersona(String documento, String nombre) {
-		Persona persona = new Persona(documento, nombre, null, null);
-		//guardar el objeto
-	}
-
-	public void eliminarPersona(String documento) throws PersonaException {
-		//Persona persona = buscarPersona(documento);
-		//eliminar el objeto
-	}
 
 
 

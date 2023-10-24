@@ -40,5 +40,6 @@ public class DuenioController {
         return duenioService.guardar(duenio);
     }
 
+
 }
 

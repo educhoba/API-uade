@@ -22,14 +22,10 @@ public class DuenioService implements IService<Duenio,Duenio>{
         this.iRepository=iRepository;
     }
 
-
     @Override
     public List<Duenio> listar() {
         return iRepository.findAll();
     }
-
-
-
 
     @Override
     public Duenio guardar(Duenio entity) {
@@ -46,7 +42,6 @@ public class DuenioService implements IService<Duenio,Duenio>{
     public void eliminarPorId(Long id) {
          iRepository.deleteById(id);
     }
-
     @Override
     public void eliminar(Duenio entity) {
         iRepository.delete(entity);
