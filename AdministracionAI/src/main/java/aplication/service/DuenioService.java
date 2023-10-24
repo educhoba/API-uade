@@ -1,8 +1,10 @@
 package aplication.service;
 
+import aplication.exceptions.PersonaException;
 import aplication.model.Duenio;
 import aplication.model.Edificio;
 import aplication.model.Inquilino;
+import aplication.model.Persona;
 import aplication.repository.IDuenioRepository;
 import aplication.repository.IEdificioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +30,11 @@ public class DuenioService implements IService<Duenio,Duenio>{
     }
 
     @Override
-    public Duenio guardar(Duenio entity) {
-        return iRepository.save(entity);
+    public Duenio guardar(Duenio duenio) {
+        if(duenio.getDocumento()==null || duenio.getIdentificador() > 0) {
+            return null;
+        }
+        return iRepository.save(duenio);
     }
 
     @Override
@@ -46,7 +51,5 @@ public class DuenioService implements IService<Duenio,Duenio>{
     public void eliminar(Duenio entity) {
         iRepository.delete(entity);
     }
-    public List<Duenio> buscarPorDocumento(String documento) {
-        return iRepository.findByDocumento(documento);
-    }
+
 }

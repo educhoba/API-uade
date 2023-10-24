@@ -1,5 +1,8 @@
 package aplication.service;
 
+import aplication.exceptions.PersonaException;
+import aplication.exceptions.UnidadException;
+import aplication.model.Persona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,9 +26,8 @@ public class UnidadService implements IService<Unidad, Unidad> {
     }
 
     @Override
-    public Unidad guardar(Unidad entity) {
-        return iRepository.save(entity);
-
+    public Unidad guardar(Unidad unidad) {
+        return iRepository.save(unidad);
     }
 
 
@@ -34,7 +36,15 @@ public class UnidadService implements IService<Unidad, Unidad> {
         Optional<Unidad> ret = iRepository.findById(id);
         return ret.orElse(null);
     }
-
+    public Unidad buscarPorIdentificador(Integer identificador) throws UnidadException{
+        Optional<Unidad> ret = iRepository.findByIdentificador(identificador);
+        if(ret.isPresent())
+        {
+            return ret.get();
+        }
+        else
+            throw new UnidadException("No existe una persona con ese documento. Contactese a la admin para registrarse.");
+    }
     public Unidad buscarPorEdificioPisoNumero(Integer codigoEdificio, String piso, String numero) {
         Optional<Unidad> ret = iRepository.findByCodigoEdificioAndPisoAndNumero(codigoEdificio,piso,numero);
         return ret.orElse(null);
@@ -48,12 +58,12 @@ public class UnidadService implements IService<Unidad, Unidad> {
 */
     @Override
     public void eliminarPorId(Long id) {
-        iRepository.deleteById(id);
+        //no se puede elminar una unidad
     }
 
     @Override
     public void eliminar(Unidad entity) {
-        iRepository.delete(entity);
+        //no se puede elminar una unidad
     }
 
 

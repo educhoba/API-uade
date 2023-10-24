@@ -129,4 +129,14 @@ public class UnidadController {
         return unidadService.guardar(unidad);
     }
 
+    //transferir
+
+    //agregarDuenio
+
+    //alquilar
+
+    //agregarInquilino
+
+    //
+
 }

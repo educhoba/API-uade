@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +27,9 @@ public class EdificioService implements IService<Edificio,Edificio> {
     }
 
     @Override
-    public Edificio guardar(Edificio entity) {
-        return iRepository.save(entity);
+    public Edificio guardar(Edificio edificio) {
+        //no se puede guardar un edificio
+        return null;
     }
 
     @Override
@@ -38,15 +40,12 @@ public class EdificioService implements IService<Edificio,Edificio> {
 
     @Override
     public void eliminarPorId(Long id) {
-        iRepository.deleteById(id);
+        //no se puede guardar un edificio
     }
 
     @Override
     public void eliminar(Edificio entity) {
-        iRepository.delete(entity);
+        //no se puede eliminar un edificio
     }
 
-    public List<Unidad> getUnidades() {
-        return null; //todo
-    }
 }

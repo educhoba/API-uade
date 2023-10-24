@@ -29,7 +29,12 @@ public class Inquilino {
     public Inquilino(){
 
     }
-
+    public Inquilino(Persona p, Unidad u){
+        identificador = u.getIdentificador();
+        documento = p.getDocumento();
+        persona = p;
+        unidad = u;
+    }
 
     public Persona getPersona() {
         return this.persona;
@@ -52,7 +57,7 @@ public class Inquilino {
     }
 
     public void setIdentificador(int identificador) {
-        this.identificador = identificador;
+        //no se cambia el identificador
     }
 
     public String getDocumento() {

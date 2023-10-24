@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Entity
@@ -45,28 +46,16 @@ public class Unidad {
     public Edificio getEdificio() {
         return this.edificio;
     }
-
     public Integer getIdentificador() { return identificador;  }
-    public void setIentificador(Integer identificadorNuevo) {
-        this.identificador=identificadorNuevo;
-        return;
-    }
-
     public String getPiso() {
         return this.piso;
-    }
-    public void setPiso(String pisoNuevo) {
-        this.piso=pisoNuevo;
-        return;
     }
 
     private void setHabitado(String habitadoNuevo) {
         this.habitado=habitadoNuevo;
         return;
     }
-
     public String getNumero(){return this.numero;}
-
 
     public UnidadView toView() {
         return null; //todo
@@ -92,28 +81,45 @@ public class Unidad {
     public List<Reclamo> getReclamos() {
         return this.reclamos;
     }
+    //todo testear
     public void transferir(Persona persona) {
-        //todo
+        //eliminar duenios
+        this.duenios = new ArrayList<Duenio>();
+        this.duenios.add(new Duenio(persona,this));
     }
-
+    //todo testear
     public void agregarDuenio(Persona persona) {
-        //todo
+        List<Persona> due = this.getDuenios();
+        if(!due.contains(persona)) {
+            this.duenios.add(new Duenio(persona,this));
+        }
     }
-
+    //todo testear
     public void alquilar(Persona persona) {
-        //todo
+        if(!estaAlquilada())
+            agregarInquilino(persona);
     }
 
+    //todo testear
     public void agregarInquilino(Persona persona) {
-        //todo
+        List<Persona> inq = this.getInquilinos();
+        if(!inq.contains(persona)) {
+            this.inquilinos.add(new Inquilino(persona,this));
+        }
     }
-
+    //todo testear
     public void liberar() {
         this.setHabitado("N");
     }
-
+    //todo testear
     public void habitar() {
         this.setHabitado("Y");
     }
-    public boolean estaHabitada(){return this.habitado == "Y";}
+    //todo testear
+    public boolean estaHabitada(){return Objects.equals(this.habitado, "Y");}
+    //todo testear
+    public boolean estaAlquilada(){
+        List<Persona> inq = this.getInquilinos();
+        return inq != null && !inq.isEmpty();
+    }
 }

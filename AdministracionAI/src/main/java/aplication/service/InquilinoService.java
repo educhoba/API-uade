@@ -27,8 +27,11 @@ public class InquilinoService implements IService<Inquilino,Inquilino> {
     }
 
     @Override
-    public Inquilino guardar(Inquilino entity) {
-        return iRepository.save(entity);
+    public Inquilino guardar(Inquilino inquilino) {
+        if(inquilino.getDocumento()==null || inquilino.getIdentificador() > 0) {
+            return null;
+        }
+        return iRepository.save(inquilino);
     }
 
     @Override

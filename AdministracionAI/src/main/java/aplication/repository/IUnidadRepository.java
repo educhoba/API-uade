@@ -7,5 +7,8 @@ import java.util.Optional;
 
 public interface IUnidadRepository extends JpaRepository<Unidad,Long> {
     //List<Beneficio> findAllByProducto_Id(Long id);
+    public Optional<Unidad> findByIdentificador(Integer identificador);
     public Optional<Unidad> findByCodigoEdificioAndPisoAndNumero(Integer codigoEdificio, String piso, String numero);
+
+
 }

@@ -30,7 +30,12 @@ public class Duenio {
     public Duenio(){
 
     }
-
+    public Duenio(Persona p, Unidad u){
+        identificador = u.getIdentificador();
+        documento = p.getDocumento();
+        persona = p;
+        unidad = u;
+    }
     public Persona getPersona() {
         return this.persona;
     }
@@ -42,10 +47,6 @@ public class Duenio {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getIdentificador() {
