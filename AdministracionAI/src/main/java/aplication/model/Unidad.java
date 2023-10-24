@@ -1,5 +1,6 @@
 package aplication.model;
 
+import aplication.exceptions.UnidadException;
 import aplication.views.UnidadView;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -30,11 +31,9 @@ public class Unidad {
     private List<Reclamo> reclamos;
 
     @OneToMany(mappedBy = "unidad")
-    @JsonIgnore
     private List<Inquilino> inquilinos;
 
     @OneToMany(mappedBy = "unidad")
-    @JsonIgnore
     private List<Duenio> duenios;
 
     public Unidad() {
@@ -95,18 +94,36 @@ public class Unidad {
         }
     }
     //todo testear
-    public void alquilar(Persona persona) {
+    public Inquilino alquilar(Persona persona) throws UnidadException {
         if(!estaAlquilada())
-            agregarInquilino(persona);
+            return agregarInquilinoPrivate(persona);
+        else
+            throw new UnidadException("Ya está alquilada.");
     }
 
     //todo testear
-    public void agregarInquilino(Persona persona) {
-        List<Persona> inq = this.getInquilinos();
-        if(!inq.contains(persona)) {
-            this.inquilinos.add(new Inquilino(persona,this));
+    public Inquilino agregarInquilino(Persona persona) throws UnidadException{
+        if(estaAlquilada()){
+            return agregarInquilinoPrivate(persona);
         }
+        else
+            throw new UnidadException("No está alquilada.");
     }
+
+    private Inquilino agregarInquilinoPrivate(Persona persona) throws UnidadException {
+        List<Persona> inq = this.getInquilinos();
+        List<Persona> due = this.getDuenios();
+        if(due.contains(persona))
+            throw new UnidadException("No se puede alquilar al duenio.");
+        if(!inq.contains(persona)) {
+            Inquilino nuevoInquilino = new Inquilino(persona,this);
+            this.inquilinos.add(nuevoInquilino);
+            return nuevoInquilino;
+        }
+        else
+            throw new UnidadException("Esa persona ya está alquilando.");
+    }
+
     //todo testear
     public void liberar() {
         this.setHabitado("N");

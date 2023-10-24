@@ -1,5 +1,6 @@
 package aplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +16,7 @@ public class Duenio {
     private int identificador;
 
     @Column(name = "documento", length = 20, nullable = false)
+    @JsonIgnore
     private String documento;
 
     @ManyToOne
@@ -22,6 +24,7 @@ public class Duenio {
     private Persona persona;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "identificador", referencedColumnName = "identificador", insertable = false, updatable = false)
     private Unidad unidad;
 

@@ -31,7 +31,7 @@ public class DuenioService implements IService<Duenio,Duenio>{
 
     @Override
     public Duenio guardar(Duenio duenio) {
-        if(duenio.getDocumento()==null || duenio.getIdentificador() > 0) {
+        if(duenio.getDocumento()==null || duenio.getIdentificador() <= 0) {
             return null;
         }
         return iRepository.save(duenio);

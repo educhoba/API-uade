@@ -30,7 +30,7 @@ public class ReclamoService implements IService<Reclamo, Reclamo> {
     @Override
     public Reclamo guardar(Reclamo reclamo) {
 
-        if(reclamo.getDocumento()==null || reclamo.getUbicacion()==null || reclamo.getDescripcion() ==null || reclamo.getIdentificador() > 0 || reclamo.getCodigo() > 0) {
+        if(reclamo.getDocumento()==null || reclamo.getUbicacion()==null || reclamo.getDescripcion() ==null || reclamo.getIdentificador() <= 0 || reclamo.getCodigo() <= 0) {
             return null;
         }
         return iRepository.save(reclamo);

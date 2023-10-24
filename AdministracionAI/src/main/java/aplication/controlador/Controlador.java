@@ -9,6 +9,7 @@ import aplication.model.Edificio;
 import aplication.model.Persona;
 import aplication.model.Reclamo;
 import aplication.model.Unidad;
+import aplication.model.Inquilino;
 import aplication.service.*;
 import aplication.views.*;
 import aplication.exceptions.EdificioException;
@@ -29,6 +30,8 @@ public class Controlador {
 	private UnidadService unidadService;
 	@Autowired
 	private PersonaService personaService;
+	@Autowired
+	private InquilinoService inquilinoService;
 
 
 	UnidadService uniSvc;
@@ -42,13 +45,14 @@ public class Controlador {
 
 	//<editor-fold desc="cruzadas">
 
-	//transferir TODO TESTEAR
+	//transferir WIP TODO TESTEAR
 	@PostMapping("/transferirUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}/documento/{documento}")
 	public ResponseEntity<String> transferirUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero,@PathVariable String documento){
 		try{
 			Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
 			Persona persona = personaService.buscarPersona(documento);
 			unidad.transferir(persona);
+			//eliminar todos los duenios
 			unidadService.guardar(unidad);
 		}
 		catch (Exception ex){
@@ -58,7 +62,7 @@ public class Controlador {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body("Unidad transferida.");
 	}
-	//agregarDuenio TODO TESTEAR
+	//agregarDuenio WIP TODO TESTEAR
 	@PostMapping("/agregarDuenioUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}/documento/{documento}")
 	public ResponseEntity<String> agregarDuenioUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero,@PathVariable String documento){
 		try{
@@ -74,13 +78,14 @@ public class Controlador {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body("Duenio agregado.");
 	}
-	//alquilar TODO TESTEAR
+	//alquilar
 	@PostMapping("/alquilarUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}/documento/{documento}")
 	public ResponseEntity<String> alquilarUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero,@PathVariable String documento){
 		try{
 			Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
 			Persona persona = personaService.buscarPersona(documento);
-			unidad.alquilar(persona);
+			Inquilino inq = unidad.alquilar(persona);
+			inquilinoService.guardar(inq);
 			unidadService.guardar(unidad);
 		}
 		catch (Exception ex){
@@ -88,9 +93,9 @@ public class Controlador {
 					.body(ex.getMessage());
 		}
 		return ResponseEntity.status(HttpStatus.OK)
-				.body("Duenio agregado.");
+				.body("Unidad alquilada.");
 	}
-	//agregarInquilino TODO TESTEAR
+	//agregarInquilino WIP TODO TESTEAR
 	@PostMapping("/agregarInquilinoUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}/documento/{documento}")
 	public ResponseEntity<String> agregarInquilinoUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero,@PathVariable String documento){
 		try{
