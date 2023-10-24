@@ -27,8 +27,6 @@ public class ReclamoService implements IService<Reclamo, Reclamo> {
         return iRepository.findAll();
     }
 
-
-
     @Override
     public Reclamo guardar(Reclamo entity) {
         return iRepository.save(entity);

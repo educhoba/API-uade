@@ -80,14 +80,6 @@ public class Reclamo {
         return this.unidad;
     }
 
-
-
-
-
-
-
-
-
     //<editor-fold desc="Getters">
     public String getDocumento() {
         return documento;

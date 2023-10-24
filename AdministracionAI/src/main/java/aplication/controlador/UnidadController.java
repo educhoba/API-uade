@@ -41,6 +41,8 @@ public class UnidadController {
     public ResponseEntity<Unidad> buscarPorEdificioPisoNumero(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero){
         //List<PersonaView> resultado = new ArrayList<PersonaView>();
         Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
+        if(unidad == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return ResponseEntity.ok(unidad);
     }
     @GetMapping("/edificioByIdUnidad/{codigo}")
@@ -61,7 +63,11 @@ public class UnidadController {
     public ResponseEntity<List<Persona>> inquilinosPorUnidad(@PathVariable Long codigo){
         //List<PersonaView> resultado = new ArrayList<PersonaView>();
         Unidad unidad = unidadService.buscarPorCodigo(codigo);
+        if(unidad == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         List<Persona> inquilinos = unidad.getInquilinos();
+        if(inquilinos == null || inquilinos.isEmpty())
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         //for(Persona persona : inquilinos)
         //    resultado.add(persona.toView());
         return ResponseEntity.ok(inquilinos);
@@ -70,7 +76,11 @@ public class UnidadController {
     public ResponseEntity<List<Persona>> inquilinosPorEdificioPisoNumero(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero){
         //List<PersonaView> resultado = new ArrayList<PersonaView>();
         Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
+        if(unidad == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         List<Persona> inquilinos = unidad.getInquilinos();
+        if(inquilinos == null || inquilinos.isEmpty())
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         //for(Persona persona : inquilinos)
         //    resultado.add(persona.toView());
         return ResponseEntity.ok(inquilinos);
@@ -88,6 +98,7 @@ public class UnidadController {
     @PostMapping("/liberarUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}")
     public ResponseEntity<Unidad> liberarUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero){
         Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
+        //todo
         return null;
     }
     @PostMapping("/habitarUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}")

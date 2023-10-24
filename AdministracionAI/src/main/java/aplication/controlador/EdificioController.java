@@ -51,7 +51,11 @@ public class EdificioController {
     public ResponseEntity<List<Unidad>> getUnidadesPorEdificio(@PathVariable Long codigo){
 
         Edificio edificio = edificioService.buscarPorCodigo(codigo);
+        if(edificio == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         List<Unidad> unidades = edificio.getUnidades();
+            if(unidades == null || unidades.isEmpty())
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return ResponseEntity.ok(unidades);
     }
     //trae todos los duenios del edificio
@@ -59,8 +63,12 @@ public class EdificioController {
     public ResponseEntity<List<Persona>> dueniosPorEdificio(@PathVariable Long codigo){
         //List<PersonaView> resultado = new ArrayList<PersonaView>();
         Edificio edificio = edificioService.buscarPorCodigo(codigo);
-        List<Persona> duenios = edificio.duenios();
+        if(edificio == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
+        List<Persona> duenios = edificio.duenios();
+        if(duenios == null || duenios.isEmpty())
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         //for(Persona persona : habilitados)
         //    resultado.add(persona.toView());
 
@@ -71,8 +79,11 @@ public class EdificioController {
     public ResponseEntity<List<Persona>> habilitadosPorEdificio(@PathVariable Long codigo){
         //List<PersonaView> resultado = new ArrayList<PersonaView>();
         Edificio edificio = edificioService.buscarPorCodigo(codigo);
+        if(edificio == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         List<Persona> habilitados = edificio.habilitados();
-
+            if(habilitados == null || habilitados.isEmpty())
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         //for(Persona persona : habilitados)
         //    resultado.add(persona.toView());
 
@@ -83,7 +94,11 @@ public class EdificioController {
     public ResponseEntity<List<Persona>> habitantesPorEdificio(@PathVariable Long codigo){
         //List<PersonaView> resultado = new ArrayList<PersonaView>();
         Edificio edificio = edificioService.buscarPorCodigo(codigo);
+        if(edificio == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         List<Persona> habitantes = edificio.habitantes();
+        if(habitantes == null || habitantes.isEmpty())
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         //for(Persona persona : habitantes)
         //    resultado.add(persona.toView());
         return ResponseEntity.ok(habitantes);

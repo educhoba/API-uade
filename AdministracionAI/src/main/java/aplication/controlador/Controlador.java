@@ -103,28 +103,6 @@ public class Controlador {
 		List<ReclamoView> resultado = new ArrayList<ReclamoView>();
 		return resultado;
 	}
-	
-	public ReclamoView reclamosPorNumero(int numero) {
-		ReclamoView resultado = null;
-		return resultado;
-	}
-	
-	public List<ReclamoView> reclamosPorPersona(String documento) {
-		List<ReclamoView> resultado = new ArrayList<ReclamoView>();
-		return resultado;
-	}
 
-	public void agregarImagenAReclamo(Long numero, String direccion, String tipo) throws ReclamoException {
-		Reclamo reclamo = buscarReclamo(numero);
-		reclamo.agregarImagen(direccion, tipo);
-	}
-	
-	public void cambiarEstado(Long numero, Estado estado) throws ReclamoException {
-		Reclamo reclamo = buscarReclamo(numero);
-		reclamo.cambiarEstado(estado);
-	}
 
-	private Reclamo buscarReclamo(Long numero) throws ReclamoException {
-		return null;
-	}
 }
