@@ -112,7 +112,7 @@ public class UnidadController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/cargar")
     public Unidad cargarUnidad(@RequestBody Unidad unidad) {
         return unidadService.guardar(unidad);
         /*
@@ -122,7 +122,7 @@ public class UnidadController {
                         */
     }
     //todo TEST
-    @PostMapping()
+    @PostMapping("/liberar")
     public Unidad liberarUnidad(@RequestBody Unidad unidad){
         unidad.liberar();
         //todo que pasa  si es null?
@@ -130,7 +130,7 @@ public class UnidadController {
     }
 
     //todo TEST
-    @PostMapping()
+    @PostMapping("/habitar")
     public Unidad habitarUnidad(@RequestBody Unidad unidad){
         unidad.habitar();
         //todo que pasa  si es null?

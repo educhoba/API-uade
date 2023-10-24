@@ -91,7 +91,7 @@ public class Controlador {
 				.body("Duenio agregado.");
 	}
 	//agregarInquilino TODO TESTEAR
-	@PostMapping("/agregarDuenioUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}/documento/{documento}")
+	@PostMapping("/agregarInquilinoUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}/documento/{documento}")
 	public ResponseEntity<String> agregarInquilinoUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero,@PathVariable String documento){
 		try{
 			Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);

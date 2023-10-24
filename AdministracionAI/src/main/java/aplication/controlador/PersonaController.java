@@ -39,7 +39,7 @@ public class PersonaController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/cargar")
     public ResponseEntity<String> cargarPersona(@RequestBody Persona persona) {
         try{
             personaService.agregarPersona(persona);
@@ -52,7 +52,7 @@ public class PersonaController {
                 .body("Persona cargada.");
     }
 
-    @PostMapping()
+    @PostMapping("/registrarUsuario")
     public ResponseEntity<String> registrarUsuario(@RequestBody Persona persona){
         try{
             personaService.registrarUsuario(persona);
@@ -65,7 +65,7 @@ public class PersonaController {
                 .body("Usuario registrado.");
     }
 
-    @PostMapping
+    @PostMapping("/eliminar")
     public ResponseEntity<String> eliminarPersona(@RequestBody Persona persona) {
         try{
             personaService.eliminarPersona(persona);
@@ -77,7 +77,7 @@ public class PersonaController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body("Persona eliminada.");
     }
-    @PostMapping
+    @PostMapping("/cambiarContraseña")
     public ResponseEntity<String> cambiarContraseña(@RequestBody Persona persona) {
         try{
             personaService.cambiarContrasenia(persona);
