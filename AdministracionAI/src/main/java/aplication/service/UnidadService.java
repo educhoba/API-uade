@@ -43,11 +43,16 @@ public class UnidadService implements IService<Unidad, Unidad> {
             return ret.get();
         }
         else
-            throw new UnidadException("No existe una persona con ese documento. Contactese a la admin para registrarse.");
+            throw new UnidadException("No existe una unidad con ese identificador.");
     }
-    public Unidad buscarPorEdificioPisoNumero(Integer codigoEdificio, String piso, String numero) {
+    public Unidad buscarPorEdificioPisoNumero(Integer codigoEdificio, String piso, String numero) throws UnidadException{
         Optional<Unidad> ret = iRepository.findByCodigoEdificioAndPisoAndNumero(codigoEdificio,piso,numero);
-        return ret.orElse(null);
+        if(ret.isPresent())
+        {
+            return ret.get();
+        }
+        else
+            throw new UnidadException("No existe una unidad.");
     }
 /*
     @Override

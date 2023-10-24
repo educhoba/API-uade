@@ -1,5 +1,6 @@
 package aplication.controlador;
 
+import aplication.exceptions.PersonaException;
 import aplication.exceptions.UnidadException;
 import aplication.model.Edificio;
 import aplication.model.Persona;
@@ -42,10 +43,15 @@ public class UnidadController {
     @GetMapping("/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}")
     public ResponseEntity<Unidad> buscarPorEdificioPisoNumero(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero){
         //List<PersonaView> resultado = new ArrayList<PersonaView>();
-        Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
-        if(unidad == null)
+        try{
+            Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
+            if(unidad == null)
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.ok(unidad);
+        }
+        catch (UnidadException ex){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        return ResponseEntity.ok(unidad);
+        }
     }
     @GetMapping("/edificioByIdUnidad/{codigo}")
     public ResponseEntity<Edificio> edificioPorUnidad(@PathVariable Long codigo)  {
@@ -77,28 +83,33 @@ public class UnidadController {
     @GetMapping("/inquilinosByEdificioAndPisoAndNumeroUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}")
     public ResponseEntity<List<Persona>> inquilinosPorEdificioPisoNumero(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero){
         //List<PersonaView> resultado = new ArrayList<PersonaView>();
-        Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
-        if(unidad == null)
+        try{
+            Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);List<Persona> inquilinos = unidad.getInquilinos();
+            if(inquilinos == null || inquilinos.isEmpty())
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            //for(Persona persona : inquilinos)
+            //    resultado.add(persona.toView());
+            return ResponseEntity.ok(inquilinos);
+        }
+        catch (UnidadException ex){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        List<Persona> inquilinos = unidad.getInquilinos();
-        if(inquilinos == null || inquilinos.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        //for(Persona persona : inquilinos)
-        //    resultado.add(persona.toView());
-        return ResponseEntity.ok(inquilinos);
+        }
     }
 
     @GetMapping("/reclamosPorUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}")
     public ResponseEntity<List<Reclamo>> reclamosPorUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso, @PathVariable String numero) {
-        Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
-        if(unidad == null)
+        try{
+            Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
+            List<Reclamo> reclamos = unidad.getReclamos();
+            if(reclamos == null || reclamos.isEmpty())
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            //for(Persona persona : inquilinos)
+            //    resultado.add(persona.toView());
+            return ResponseEntity.ok(reclamos);
+        }
+        catch (Exception ex){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        List<Reclamo> reclamos = unidad.getReclamos();
-        if(reclamos == null || reclamos.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        //for(Persona persona : inquilinos)
-        //    resultado.add(persona.toView());
-        return ResponseEntity.ok(reclamos);
+        }
     }
 
     @PostMapping
@@ -111,32 +122,19 @@ public class UnidadController {
                         */
     }
     //todo TEST
-    @PostMapping("/liberarUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}")
-    public Unidad liberarUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero){
-        Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
-        if(unidad != null)
-            unidad.liberar();
+    @PostMapping()
+    public Unidad liberarUnidad(@RequestBody Unidad unidad){
+        unidad.liberar();
         //todo que pasa  si es null?
         return unidadService.guardar(unidad);
     }
+
     //todo TEST
-    @PostMapping("/habitarUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}")
-    public Unidad habitarUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero){
-        Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
-        if(unidad != null)
-            unidad.habitar();
+    @PostMapping()
+    public Unidad habitarUnidad(@RequestBody Unidad unidad){
+        unidad.habitar();
         //todo que pasa  si es null?
         return unidadService.guardar(unidad);
     }
-
-    //transferir
-
-    //agregarDuenio
-
-    //alquilar
-
-    //agregarInquilino
-
-    //
 
 }

@@ -46,7 +46,7 @@ public class PersonaService implements IService<Persona, Persona> {
         return iRepository.save(entity);
     }
 
-    public Persona buscarPorDocumento(String id) {
+    private Persona buscarPorDocumento(String id) {
         Optional<Persona> ret = iRepository.findByDocumento(id);
         return ret.orElse(null);
     }

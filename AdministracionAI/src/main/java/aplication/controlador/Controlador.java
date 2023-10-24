@@ -15,29 +15,20 @@ import aplication.exceptions.EdificioException;
 import aplication.exceptions.ReclamoException;
 import aplication.exceptions.UnidadException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/negocio")
 public class Controlador {
 
 	private static Controlador instancia;
 
-	EdificioService ediSvc;
-
-	ImagenService imgSvc;
-
-
-	PersonaService perSvc;
-
-
-	ReclamoService recSvc;
-
 	@Autowired
-	private EdificioService edificioService;
+	private UnidadService unidadService;
+	@Autowired
+	private PersonaService personaService;
 
 
 	UnidadService uniSvc;
@@ -50,38 +41,72 @@ public class Controlador {
 	}
 
 	//<editor-fold desc="cruzadas">
-	public void transferirUnidad(Long codigo, String piso, String numero, String documento) throws UnidadException, PersonaException {
-		//Unidad unidad = buscarUnidad(codigo, piso, numero);
-		//Persona persona = buscarPersona(documento);
-		//unidad.transferir(persona);
+
+	//transferir TODO TESTEAR
+	@PostMapping("/transferirUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}/documento/{documento}")
+	public ResponseEntity<String> transferirUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero,@PathVariable String documento){
+		try{
+			Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
+			Persona persona = personaService.buscarPersona(documento);
+			unidad.transferir(persona);
+			unidadService.guardar(unidad);
+		}
+		catch (Exception ex){
+			return ResponseEntity.badRequest()
+					.body(ex.getMessage());
+		}
+		return ResponseEntity.status(HttpStatus.OK)
+				.body("Unidad transferida.");
+	}
+	//agregarDuenio TODO TESTEAR
+	@PostMapping("/agregarDuenioUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}/documento/{documento}")
+	public ResponseEntity<String> agregarDuenioUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero,@PathVariable String documento){
+		try{
+			Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
+			Persona persona = personaService.buscarPersona(documento);
+			unidad.agregarDuenio(persona);
+			unidadService.guardar(unidad);
+		}
+		catch (Exception ex){
+			return ResponseEntity.badRequest()
+					.body(ex.getMessage());
+		}
+		return ResponseEntity.status(HttpStatus.OK)
+				.body("Duenio agregado.");
+	}
+	//alquilar TODO TESTEAR
+	@PostMapping("/alquilarUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}/documento/{documento}")
+	public ResponseEntity<String> alquilarUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero,@PathVariable String documento){
+		try{
+			Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
+			Persona persona = personaService.buscarPersona(documento);
+			unidad.alquilar(persona);
+			unidadService.guardar(unidad);
+		}
+		catch (Exception ex){
+			return ResponseEntity.badRequest()
+					.body(ex.getMessage());
+		}
+		return ResponseEntity.status(HttpStatus.OK)
+				.body("Duenio agregado.");
+	}
+	//agregarInquilino TODO TESTEAR
+	@PostMapping("/agregarDuenioUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}/documento/{documento}")
+	public ResponseEntity<String> agregarInquilinoUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero,@PathVariable String documento){
+		try{
+			Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
+			Persona persona = personaService.buscarPersona(documento);
+			unidad.agregarInquilino(persona);
+			unidadService.guardar(unidad);
+		}
+		catch (Exception ex){
+			return ResponseEntity.badRequest()
+					.body(ex.getMessage());
+		}
+		return ResponseEntity.status(HttpStatus.OK)
+				.body("Inquilino agregado.");
 	}
 
-	public void agregarDuenioUnidad(Long codigo, String piso, String numero, String documento) throws UnidadException, PersonaException {
-		//Unidad unidad = buscarUnidad(codigo, piso, numero);
-		//Persona persona = buscarPersona(documento);
-		//unidad.agregarDuenio(persona);
-	}
-
-	public void alquilarUnidad(Long codigo, String piso, String numero, String documento) throws UnidadException, PersonaException{
-		//Unidad unidad = buscarUnidad(codigo, piso, numero);
-		//Persona persona = buscarPersona(documento);
-		//unidad.alquilar(persona);
-	}
-
-	public void agregarInquilinoUnidad(Long codigo, String piso, String numero, String documento) throws UnidadException, PersonaException{
-		//Unidad unidad = buscarUnidad(codigo, piso, numero);
-		//Persona persona = buscarPersona(documento);
-		//unidad.agregarInquilino(persona);
-	}
-
-	public int agregarReclamo(Long codigo, String piso, String numero, String documento, String ubicacion, String descripcion){
-		//Edificio edificio = buscarEdificio(codigo);
-		//Unidad unidad = buscarUnidad(codigo, piso, numero);
-		//Persona persona = buscarPersona(documento);
-		//Reclamo reclamo = new Reclamo(persona, edificio, ubicacion, descripcion, unidad);
-		//return reclamo.getIdentificador();
-		return 0;
-	}
 	//</editor-fold>
 
 

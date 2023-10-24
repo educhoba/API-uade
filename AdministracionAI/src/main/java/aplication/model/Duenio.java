@@ -25,8 +25,6 @@ public class Duenio {
     @JoinColumn(name = "identificador", referencedColumnName = "identificador", insertable = false, updatable = false)
     private Unidad unidad;
 
-
-
     public Duenio(){
 
     }

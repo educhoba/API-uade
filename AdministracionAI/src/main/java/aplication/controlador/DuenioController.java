@@ -14,7 +14,6 @@ import aplication.service.*;
 @RequestMapping("/duenios")
 public class DuenioController {
 
-    private static Controlador instancia;
 
    // DuenioService duenioService;
     @Autowired
