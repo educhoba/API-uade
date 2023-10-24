@@ -38,22 +38,54 @@ public class PersonaController {
     }
 
     @PostMapping
-    public Persona cargarPersona(@RequestBody Persona persona) {
-        return personaService.guardar(persona);
-    }
-
-    @PostMapping("/registrarUsuario/documento/{documento}/mail/{mail}/contrasenia/{contrasenia}")
-    public ResponseEntity<String> registrarUsuario(@PathVariable String documento, @PathVariable String mail, @PathVariable String contrasenia){
+    public ResponseEntity<String> cargarPersona(@RequestBody Persona persona) {
         try{
-            personaService.registrarUsuario(documento,mail,contrasenia);
+            personaService.agregarPersona(persona);
         }
         catch (PersonaException ex){
             return ResponseEntity.badRequest()
                     .body(ex.getMessage());
         }
         return ResponseEntity.status(HttpStatus.OK)
-                .body("Usuario creado.");
+                .body("Persona cargada.");
     }
 
+    @PostMapping()
+    public ResponseEntity<String> registrarUsuario(@RequestBody Persona persona){
+        try{
+            personaService.registrarUsuario(persona);
+        }
+        catch (PersonaException ex){
+            return ResponseEntity.badRequest()
+                    .body(ex.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("Usuario registrado.");
+    }
+
+    @PostMapping
+    public ResponseEntity<String> eliminarPersona(@RequestBody Persona persona) {
+        try{
+            personaService.eliminarPersona(persona);
+        }
+        catch (PersonaException ex){
+            return ResponseEntity.badRequest()
+                    .body(ex.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("Persona eliminada.");
+    }
+    @PostMapping
+    public ResponseEntity<String> cambiarContraseña(@RequestBody Persona persona) {
+        try{
+            personaService.cambiarContrasenia(persona);
+        }
+        catch (PersonaException ex){
+            return ResponseEntity.badRequest()
+                    .body(ex.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("Contraseña cambiada.");
+    }
 }
 

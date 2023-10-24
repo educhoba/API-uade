@@ -80,34 +80,29 @@ public class PersonaService implements IService<Persona, Persona> {
             return ret.get();
         }
         else
-            throw new PersonaException("contactese a la admin para registrarse.");
+            throw new PersonaException("No existe una persona con ese documento. Contactese a la admin para registrarse.");
     }
-    public void registrarUsuario(String documento, String mail, String contrasenia) throws PersonaException {
-        Persona p = buscarPersona(documento);
-        p.setMail(mail.trim());
-        p.setContrasenia(contrasenia.trim());
+    public void registrarUsuario(Persona persona) throws PersonaException {
+        Persona p = buscarPersona(persona.getDocumento());
+        p.setMail(persona.getMail().trim());
+        p.setContrasenia(persona.getContrasenia().trim());
         guardar(p);
     }
 
-    public void agregarPersona(String documento, String nombre) throws PersonaException{
-        Persona existe = buscarPorDocumento(documento);
+    public void agregarPersona(Persona persona) throws PersonaException{
+        Persona existe = buscarPersona(persona.getDocumento());
         if(existe == null)
-            guardar(new Persona(documento, nombre, null, null));
+            guardar(persona);
         else
             throw  new PersonaException("Ya existe una persona con ese documento.");
     }
 
-    public void eliminarPersona(String documento) throws PersonaException {
-        Persona existe = buscarPorDocumento(documento);
-        if(existe != null){
-            eliminarConEx(existe);
-        }
-        else
-            throw  new PersonaException("No existe una persona con ese documento.");
+    public void eliminarPersona(Persona persona) throws PersonaException {
+        eliminarConEx(buscarPersona(persona.getDocumento()));
     }
-    public void cambiarContrasenia(String documento, String mail, String contrasenia) throws PersonaException{
-        Persona p = buscarPersona(documento);
-        p.setContrasenia(contrasenia.trim());
+    public void cambiarContrasenia(Persona persona) throws PersonaException{
+        Persona p = buscarPersona(persona.getDocumento());
+        p.setContrasenia(persona.getContrasenia().trim());
         guardar(p);
     }
 }
