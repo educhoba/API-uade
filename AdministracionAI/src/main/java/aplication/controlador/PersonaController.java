@@ -30,11 +30,13 @@ public class PersonaController {
 
     @GetMapping("/{documento}")
     public ResponseEntity<Persona> buscar(@PathVariable String documento) {
-        Persona persona = personaService.buscarPorDocumento(documento);
-        if (persona == null || persona.getDocumento() == null)
+        try{
+            Persona persona = personaService.buscarPersona(documento);
+            return ResponseEntity.ok(persona);
+        }
+        catch (PersonaException ex){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
-        return ResponseEntity.ok(persona);
+        }
     }
 
     @PostMapping
