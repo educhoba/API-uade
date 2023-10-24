@@ -86,7 +86,6 @@ public class Controlador {
 			Persona persona = personaService.buscarPersona(documento);
 			Inquilino inq = unidad.alquilar(persona);
 			inquilinoService.guardar(inq);
-			unidadService.guardar(unidad);
 		}
 		catch (Exception ex){
 			return ResponseEntity.badRequest()
