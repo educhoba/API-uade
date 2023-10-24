@@ -113,6 +113,8 @@ public class ReclamoController {
         return ResponseEntity.status(HttpStatus.OK).body(resultado);
     }
 
+
+
     @PostMapping
     public Reclamo cargarReclamo(@RequestBody Reclamo reclamo) {
         return reclamoService.guardar(reclamo);

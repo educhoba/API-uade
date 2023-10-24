@@ -94,15 +94,7 @@ public class Controlador {
 		//Persona persona = buscarPersona(documento);
 		//eliminar el objeto
 	}
-	public List<ReclamoView> reclamosPorEdificio(int codigo){
-		List<ReclamoView> resultado = new ArrayList<ReclamoView>();
-		return resultado;
-	}
-	
-	public List<ReclamoView> reclamosPorUnidad(int codigo, String piso, String numero) {
-		List<ReclamoView> resultado = new ArrayList<ReclamoView>();
-		return resultado;
-	}
+
 
 
 }

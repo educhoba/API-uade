@@ -24,7 +24,6 @@ public class Unidad {
     @JoinColumn(name = "codigoEdificio", referencedColumnName = "codigo", insertable = false, updatable = false)
     private Edificio edificio;
 
-
     @OneToMany(mappedBy = "unidad")
     @JsonIgnore
     private List<Reclamo> reclamos;
@@ -90,7 +89,9 @@ public class Unidad {
         }
         return resultado;
     }
-
+    public List<Reclamo> getReclamos() {
+        return this.reclamos;
+    }
     public void transferir(Persona persona) {
         //todo
     }
