@@ -93,7 +93,7 @@ public class Unidad {
             this.duenios.add(new Duenio(persona,this));
         }
     }
-    //todo testear
+
     public Inquilino alquilar(Persona persona) throws UnidadException {
         if(!estaAlquilada())
             return agregarInquilinoPrivate(persona);
