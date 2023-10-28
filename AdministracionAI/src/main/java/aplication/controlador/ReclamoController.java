@@ -115,22 +115,55 @@ public class ReclamoController {
 
 
 
+
+
     @PostMapping
     public Reclamo cargarReclamo(@RequestBody Reclamo reclamo) {
         return reclamoService.guardar(reclamo);
     }
 
-    public void cambiarEstado(Long codigo, Estado estado){
-        //todo POST
-        Reclamo reclamo = reclamoService.buscarPorCodigo(codigo);
-        reclamo.cambiarEstado(estado);
+
+
+
+
+    @PutMapping("/{codigo}")
+    public ResponseEntity<Reclamo> cambiarEstado(@PathVariable Long codigo, @RequestBody Reclamo reclamoIn){
+        /*if (reclamoIn.getEstado().equals("abierto")  || reclamoIn.getEstado().equals("desestimado") || reclamoIn.getEstado().equals("anulado") || reclamoIn.getEstado().equals("en proceso") || reclamoIn.getEstado().equals("terminado")  == false)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+*/
+
+        Reclamo reclamo = reclamoService.buscarPorCodigo(codigo);  //busco el reclamo por codigo
+        if (reclamo.cambiarEstado(reclamoIn.getEstado()) == false) // cambio el estado de ese reclamo en el objeto propiamente dicho
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+        reclamoService.guardar(reclamo); //piso el anterior con este nuevo reclamo actualizado
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(reclamo);
     }
 
+
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable Long id) {
+        reclamoService.eliminarPorId(id);
+        return ResponseEntity.ok("Reclamo eliminado");
+    }
+
+
+
+/**
+ *
+ * para mi esto de agregar imagen a reclamo no va FER.
+ */
+
+/*
     public void agregarImagenAReclamo(Long codigo, String direccion, String tipo){
         //todo POST
         Reclamo reclamo = reclamoService.buscarPorCodigo(codigo);
         reclamo.agregarImagen(direccion, tipo);
     }
+*/
 /*
     @PostMapping
     public ResponseEntity<?> cargarReclamo() {

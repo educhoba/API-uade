@@ -1,5 +1,7 @@
 package aplication.service;
 
+import aplication.model.Reclamo;
+
 import java.util.List;
 
 public interface IService<T, R> {
@@ -15,4 +17,7 @@ public interface IService<T, R> {
 
     void eliminar(R entity);
 
+
+
+    T modificar(R i, String nuevo);
 }

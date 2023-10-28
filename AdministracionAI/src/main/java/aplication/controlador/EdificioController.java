@@ -103,6 +103,13 @@ public class EdificioController {
         //    resultado.add(persona.toView());
         return ResponseEntity.ok(habitantes);
     }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable Long id) {
+        edificioService.eliminarPorId(id);
+        return ResponseEntity.ok("Unidad eliminada");
+    }
+
 }
 
 

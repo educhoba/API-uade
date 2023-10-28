@@ -41,5 +41,13 @@ public class InquilinoController {
     public Inquilino cargarInquilino(@RequestBody Inquilino inquilino) {
         return inquilinoService.guardar(inquilino);
     }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable Long id) {
+        inquilinoService.eliminarPorId(id);
+        return ResponseEntity.ok("Inquilino eliminado");
+    }
+
+
 }
 

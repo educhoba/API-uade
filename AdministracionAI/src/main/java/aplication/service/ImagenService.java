@@ -1,12 +1,14 @@
 package aplication.service;
 
 import aplication.model.Imagen;
+import aplication.model.Inquilino;
 import aplication.repository.IDuenioRepository;
 import aplication.repository.IImagenRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +39,18 @@ public class ImagenService implements IService<Imagen, Imagen> {
         return ret.orElse(null);
     }
 
+    public List<Imagen> buscarPorIdReclamo(Integer id) {
+        List<Imagen> ret = iRepository.findAll();
+        List<Imagen> imagenes = new LinkedList<Imagen>();
+
+        for (Imagen imag : ret) {
+            if (imag.getIdReclamo() == id)
+                imagenes.add(imag);
+        }
+        return imagenes;
+    }
+
+
     @Override
     public void eliminarPorId(Long id) {
         iRepository.deleteById(id);
@@ -46,6 +60,13 @@ public class ImagenService implements IService<Imagen, Imagen> {
     public void eliminar(Imagen entity) {
         iRepository.delete(entity);
     }
+
+    @Override
+    public Imagen modificar(Imagen imagen, String cambio) {
+        //hacer
+        return null;
+    }
+
 
 
 

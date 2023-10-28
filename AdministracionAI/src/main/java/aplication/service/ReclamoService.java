@@ -1,9 +1,6 @@
 package aplication.service;
 
-import aplication.model.Persona;
 import aplication.model.Reclamo;
-import aplication.model.Unidad;
-import aplication.repository.IPersonaRepository;
 import aplication.repository.IReclamoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,5 +49,34 @@ public class ReclamoService implements IService<Reclamo, Reclamo> {
     @Override
     public void eliminar(Reclamo entity) {
         iRepository.delete(entity);
+    }
+
+    @Override
+    public Reclamo modificar(Reclamo reclamo, String estado) {
+
+        if((estado != "nuevo" ) || (estado != "abierto") || estado != "en proceso" || estado != "terminado" || estado != "desestimado" || estado != "anulado")
+            return null;
+
+        if(reclamo.getEstado()== "nuevo" && (estado == "abierto" || estado == "desestimado" || estado == "anulado")){
+            reclamo.cambiarEstado(estado);
+        }
+        if(reclamo.getEstado()== "abierto" && (estado == "en proceso"|| estado == "desestimado" || estado == "anulado")){
+            reclamo.cambiarEstado(estado);
+        }
+        if(reclamo.getEstado()== "en proceso" && estado == "terminado"){
+            reclamo.cambiarEstado(estado);
+        }
+        if(reclamo.getEstado()== "en proceso" && estado == "anulado"){
+            reclamo.cambiarEstado(estado);
+        }
+        //print
+        System.out.println("El estado del reclamo es: " + reclamo.getEstado());
+        //iRepository.save(reclamo);
+        System.out.println("El  reclamo es: " + reclamo);
+        this.guardar(reclamo);
+        return reclamo;
+
+
+
     }
 }

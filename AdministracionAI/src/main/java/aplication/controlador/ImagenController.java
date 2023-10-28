@@ -35,5 +35,21 @@ public class ImagenController {
     }
 
 
+    // buscas las imagenes de un reclamo, devuelve una lista de imagenes
+    @GetMapping("/buscarImagenesSegunIdReclamo/{idReclamo}")
+    public ResponseEntity<List<Imagen>> buscar(@PathVariable Integer idReclamo) {
+        List<Imagen> imagenes = imagenService.buscarPorIdReclamo(idReclamo);
+        if (imagenes == null)
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(imagenes);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable Long id) {
+        imagenService.eliminarPorId(id);
+        return ResponseEntity.ok("Imagen eliminada");
+    }
+
+
 }
 

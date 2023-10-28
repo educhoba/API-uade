@@ -42,12 +42,19 @@ public class PersonaService implements IService<Persona, Persona> {
     }
 
     @Override
-    public Persona guardar(Persona persona) {
+    public Persona guardar(Persona persona)  {
         if(persona.getDocumento()==null || persona.getNombre() == null) {
             return null;
         }
         return iRepository.save(persona);
     }
+
+    @Override
+    public Persona modificar(Persona persona, String cambio) {
+        //hacer
+        return null;
+    }
+
 
     private Persona buscarPorDocumento(String id) {
         Optional<Persona> ret = iRepository.findByDocumento(id);

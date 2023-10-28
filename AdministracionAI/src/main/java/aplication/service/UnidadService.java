@@ -36,6 +36,7 @@ public class UnidadService implements IService<Unidad, Unidad> {
         Optional<Unidad> ret = iRepository.findById(id);
         return ret.orElse(null);
     }
+
     public Unidad buscarPorIdentificador(Integer identificador) throws UnidadException{
         Optional<Unidad> ret = iRepository.findByIdentificador(identificador);
         if(ret.isPresent())
@@ -54,6 +55,8 @@ public class UnidadService implements IService<Unidad, Unidad> {
         else
             throw new UnidadException("No existe una unidad.");
     }
+
+
 /*
     @Override
     public Edificio buscarEdificioDeUnidad() {
@@ -71,7 +74,11 @@ public class UnidadService implements IService<Unidad, Unidad> {
         //no se puede elminar una unidad
     }
 
-
+    @Override
+    public Unidad modificar(Unidad unidad, String cambio) {
+        //hacer
+        return null;
+    }
 
 
 

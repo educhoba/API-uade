@@ -89,5 +89,14 @@ public class PersonaController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body("Contraseña cambiada.");
     }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable Long id) {
+        personaService.eliminarPorId(id);
+        return ResponseEntity.ok("Inquilino eliminado");
+    }
+
+
+
 }
 

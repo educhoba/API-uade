@@ -6,6 +6,7 @@ import aplication.model.Edificio;
 import aplication.model.Persona;
 import aplication.model.Reclamo;
 import aplication.model.Unidad;
+import aplication.service.PersonaService;
 import aplication.service.UnidadService;
 import aplication.views.ReclamoView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class UnidadController {
     // DuenioService duenioService;
     @Autowired
     private UnidadService unidadService;
+    @Autowired
+    private PersonaService personaService;
 
     private UnidadController() { }
 
@@ -121,6 +124,7 @@ public class UnidadController {
                         .orElseThrow(() -> new MeetingDoesNotExistException(meetingId));
                         */
     }
+
     //todo TEST
     @PostMapping("/liberar")
     public Unidad liberarUnidad(@RequestBody Unidad unidad){
@@ -136,5 +140,14 @@ public class UnidadController {
         //todo que pasa  si es null?
         return unidadService.guardar(unidad);
     }
+
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable Long id) {
+        unidadService.eliminarPorId(id);
+        return ResponseEntity.ok("Unidad eliminada");
+    }
+
+
 
 }

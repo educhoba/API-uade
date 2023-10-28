@@ -28,6 +28,9 @@ public class Reclamo {
     @Column(name = "identificador")
     private int identificador;
 
+    @Column(name = "estado", length = 20, nullable = false)
+    private String estado;
+
     // edifico reclamo
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "codigo", referencedColumnName = "codigo", insertable = false, updatable = false)
@@ -53,7 +56,15 @@ public class Reclamo {
 
     }
 
-    public Reclamo(Persona persona, Edificio edificio, String ubicacion, String descripcion, Unidad unidad){
+/*
+*
+* *
+* * //no fata id reclamo ?
+*
+*
+ */
+
+    public Reclamo(Persona persona, Edificio edificio, String ubicacion, String descripcion, String estado, Unidad unidad){
 
     }
 
@@ -65,9 +76,33 @@ public class Reclamo {
         //todo
     }
 
-    public void cambiarEstado(Estado estado) {
-        //todo
-    }
+    public boolean cambiarEstado(String estado) {
+
+
+        if(this.estado.equals("nuevo")  && (estado.equals("abierto")  ||estado.equals("desestimado") || estado.equals("anulado"))){
+            this.estado = estado;
+            System.out.println("ENTROO  A NUEVO- abierto");
+            return true;
+        }
+
+
+        if(this.estado.equals("abierto")  && (estado.equals("en proceso")  ||estado.equals("desestimado") || estado.equals("anulado"))){
+            this.estado = estado;
+            return true;
+        }
+
+        if(this.estado.equals("en proceso")  && estado.equals("terminado")){
+            this.estado = estado;
+            return true;
+        }
+
+        if(this.estado.equals("en proceso")  && estado.equals("anulado")){
+            this.estado = estado;
+            return true;
+        }
+
+        return false;
+     }
 
     public Edificio getEdificio() {
         return this.edificio;
@@ -93,6 +128,9 @@ public class Reclamo {
     public String getDescripcion(){
         return descripcion;
     }
+    public String getEstado(){
+        return estado;
+    }
 
     //</editor-fold>
 
@@ -106,6 +144,8 @@ public class Reclamo {
     public void setDescripcion(String desc){
         descripcion = desc;
     }
+
+
     public void setUbicacion(String ubicacion){
         this.ubicacion = ubicacion;
     }

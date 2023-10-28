@@ -2,6 +2,7 @@ package aplication.service;
 
 import aplication.model.Edificio;
 import aplication.model.Inquilino;
+import aplication.model.Unidad;
 import aplication.repository.IDuenioRepository;
 import aplication.repository.IImagenRespository;
 import aplication.repository.IInquilinoRepositoy;
@@ -55,5 +56,10 @@ public class InquilinoService implements IService<Inquilino,Inquilino> {
         return ret;
     }
     */
+    @Override
+    public Inquilino modificar(Inquilino inquilino, String cambio) {
+        //hacer
+        return null;
+    }
 
 }

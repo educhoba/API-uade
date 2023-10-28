@@ -1,11 +1,15 @@
 package aplication.service;
 
 import aplication.model.Edificio;
+import aplication.model.Imagen;
 import aplication.model.Unidad;
 import aplication.repository.IEdificioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,5 +51,13 @@ public class EdificioService implements IService<Edificio,Edificio> {
     public void eliminar(Edificio entity) {
         //no se puede eliminar un edificio
     }
+
+    @Override
+    public Edificio modificar(Edificio edificio, String cambio) {
+        //hacer
+        return null;
+    }
+
+
 
 }

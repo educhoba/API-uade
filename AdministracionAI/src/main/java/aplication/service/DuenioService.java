@@ -52,4 +52,12 @@ public class DuenioService implements IService<Duenio,Duenio>{
         iRepository.delete(entity);
     }
 
+
+    @Override
+    public Duenio modificar(Duenio duenio, String cambio) {
+        //hacer
+        return null;
+    }
+
+
 }

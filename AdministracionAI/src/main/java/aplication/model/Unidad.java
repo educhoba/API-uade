@@ -77,15 +77,18 @@ public class Unidad {
         }
         return resultado;
     }
+
     public List<Reclamo> getReclamos() {
         return this.reclamos;
     }
+
     //todo testear
     public void transferir(Persona persona) {
         //eliminar duenios
         this.duenios = new ArrayList<Duenio>();
         this.duenios.add(new Duenio(persona,this));
     }
+
     //todo testear
     public void agregarDuenio(Persona persona) {
         List<Persona> due = this.getDuenios();
