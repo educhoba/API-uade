@@ -83,10 +83,13 @@ public class Unidad {
     }
 
     //todo testear
-    public void transferir(Persona persona) {
+    public Duenio transferir(Persona persona) {
         //eliminar duenios
+        //todo no transferir a los inquilinos
         this.duenios = new ArrayList<Duenio>();
-        this.duenios.add(new Duenio(persona,this));
+        Duenio nuevoDuenio = new Duenio(persona,this);
+        this.duenios.add(nuevoDuenio);
+        return nuevoDuenio;
     }
 
     //todo testear

@@ -5,11 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import aplication.exceptions.PersonaException;
-import aplication.model.Edificio;
-import aplication.model.Persona;
-import aplication.model.Reclamo;
-import aplication.model.Unidad;
-import aplication.model.Inquilino;
+import aplication.model.*;
 import aplication.service.*;
 import aplication.views.*;
 import aplication.exceptions.EdificioException;
@@ -31,7 +27,10 @@ public class Controlador {
 	@Autowired
 	private PersonaService personaService;
 	@Autowired
-	private InquilinoService inquilinoService;
+	private InquilinoService inquilinoService;;
+	@Autowired
+	private DuenioService duenioService;
+
 
 
 	UnidadService uniSvc;
@@ -45,15 +44,18 @@ public class Controlador {
 
 	//<editor-fold desc="cruzadas">
 
-	//transferir WIP TODO TESTEAR
+	//transferir
 	@PostMapping("/transferirUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}/documento/{documento}")
 	public ResponseEntity<String> transferirUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero,@PathVariable String documento){
 		try{
 			Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
 			Persona persona = personaService.buscarPersona(documento);
-			unidad.transferir(persona);
-			//eliminar todos los duenios
-			unidadService.guardar(unidad);
+			List<Duenio> duenios = duenioService.buscarPorUnidadId(unidad.getIdentificador());
+			for(Duenio d : duenios){
+				duenioService.eliminar(d);
+			}
+			Duenio nuevoDuenio = unidad.transferir(persona);
+			duenioService.guardar(nuevoDuenio);
 		}
 		catch (Exception ex){
 			return ResponseEntity.badRequest()
@@ -94,6 +96,7 @@ public class Controlador {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body("Unidad alquilada.");
 	}
+
 	//agregarInquilino WIP TODO TESTEAR
 	@PostMapping("/agregarInquilinoUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}/documento/{documento}")
 	public ResponseEntity<String> agregarInquilinoUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero,@PathVariable String documento){

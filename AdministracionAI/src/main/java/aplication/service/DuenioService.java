@@ -43,6 +43,10 @@ public class DuenioService implements IService<Duenio,Duenio>{
         return ret.orElse(null);
     }
 
+    public List<Duenio> buscarPorUnidadId(int identificador) {
+        return iRepository.findByIdentificador(identificador);
+    }
+
     @Override
     public void eliminarPorId(Long id) {
          iRepository.deleteById(id);
