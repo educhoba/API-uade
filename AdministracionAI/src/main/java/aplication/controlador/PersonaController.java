@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 import aplication.service.*;
 
@@ -39,7 +40,9 @@ public class PersonaController {
         }
     }
 
-    @PostMapping("/cargar")
+
+    /* este funcionaba mal
+    @PostMapping
     public ResponseEntity<String> cargarPersona(@RequestBody Persona persona) {
         try{
             personaService.agregarPersona(persona);
@@ -51,6 +54,7 @@ public class PersonaController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body("Persona cargada.");
     }
+    */
 
     @PostMapping("/registrarUsuario")
     public ResponseEntity<String> registrarUsuario(@RequestBody Persona persona){
@@ -64,6 +68,19 @@ public class PersonaController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body("Usuario registrado.");
     }
+
+    @PostMapping public Persona cargar(@RequestBody Persona persona) {
+        try{
+            personaService.agregarPersona(persona);
+            return persona;
+        }
+        catch (PersonaException ex){
+            return null;
+        }
+
+    }
+
+
 
     @PostMapping("/eliminar")
     public ResponseEntity<String> eliminarPersona(@RequestBody Persona persona) {
@@ -94,6 +111,35 @@ public class PersonaController {
     public ResponseEntity<String> eliminar(@PathVariable Long id) {
         personaService.eliminarPorId(id);
         return ResponseEntity.ok("Inquilino eliminado");
+    }
+
+    //si esta autorizado devuelve la persona, sino devuelve 1
+    @GetMapping("/login")
+    public ResponseEntity<Persona> login(@RequestBody Map<String, String> requestBody) {
+        String mail = requestBody.get("mail");
+        String contrasenia = requestBody.get("contrasenia");
+
+        System.out.println("entroo "+mail+" "+contrasenia);
+        try {
+            Persona persona1 = personaService.buscaPorMail(mail);
+            if( persona1.getContrasenia().equals(contrasenia))
+                return ResponseEntity.ok(persona1);
+        }
+        catch (PersonaException ex){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+
+        /*try{
+            //Persona persona = personaService.buscarPersona(documento);
+            Persona persona1 = personaService.buscaPorMail(documento);
+            if( persona.getContrasenia()== contrasenia)
+            return ResponseEntity.ok(persona);
+        }
+        catch (PersonaException ex){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }*/
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
 

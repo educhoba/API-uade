@@ -43,6 +43,7 @@ public class PersonaService implements IService<Persona, Persona> {
 
     @Override
     public Persona guardar(Persona persona)  {
+        System.out.println(persona);
         if(persona.getDocumento()==null || persona.getNombre() == null) {
             return null;
         }
@@ -100,12 +101,20 @@ public class PersonaService implements IService<Persona, Persona> {
     }
 
     public void agregarPersona(Persona persona) throws PersonaException{
-        Persona existe = buscarPersona(persona.getDocumento());
-        if(existe == null)
+        System.out.println(" ENTRA A AGREGAR PERSONA");
+        try {
+            Persona existe = buscarPersona(persona.getDocumento());
+            Persona existeDos = buscaPorMail(persona.getMail());
+            if(existe != null || existeDos != null)
+                throw new PersonaException("Ya existe una persona con ese documento o mail.");
+        }
+        catch (PersonaException ex){
+            System.out.println("entra al catch");
             guardar(persona);
-        else
-            throw  new PersonaException("Ya existe una persona con ese documento.");
-    }
+
+        }
+
+        }
 
     public void eliminarPersona(Persona persona) throws PersonaException {
         eliminarConEx(buscarPersona(persona.getDocumento()));
@@ -115,4 +124,13 @@ public class PersonaService implements IService<Persona, Persona> {
         p.setContrasenia(persona.getContrasenia().trim());
         guardar(p);
     }
+    public Persona buscaPorMail(String mail) throws PersonaException {
+        Optional<Persona> ret = iRepository.findByMail(mail);
+        if(ret.isPresent())
+        {
+            return ret.get();
+        }
+        else
+            throw new PersonaException("No existe una persona con ese documento. Contactese a la admin para registrarse.");    }
+
 }
