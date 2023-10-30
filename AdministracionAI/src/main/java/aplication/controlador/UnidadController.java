@@ -114,31 +114,41 @@ public class UnidadController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+    /* no se carga una unidad
+        @PostMapping("/cargar")
+        public Unidad cargarUnidad(@RequestBody Unidad unidad) {
+            return unidadService.guardar(unidad);
 
-    @PostMapping("/cargar")
-    public Unidad cargarUnidad(@RequestBody Unidad unidad) {
-        return unidadService.guardar(unidad);
-        /*
-        Meeting meeting =
-                meetingRepository.findByMeetingId(meetingId)
-                        .orElseThrow(() -> new MeetingDoesNotExistException(meetingId));
-                        */
-    }
+            Meeting meeting =
+                    meetingRepository.findByMeetingId(meetingId)
+                            .orElseThrow(() -> new MeetingDoesNotExistException(meetingId));
 
+        }
+     */
     //todo TEST
-    @PostMapping("/liberar")
-    public Unidad liberarUnidad(@RequestBody Unidad unidad){
+    @PostMapping("/liberarPorId/{identificador}")
+    public ResponseEntity<String> liberarUnidad(@PathVariable Long identificador){
+        Unidad unidad = unidadService.buscarPorCodigo(identificador);
+        if (unidad == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
         unidad.liberar();
-        //todo que pasa  si es null?
-        return unidadService.guardar(unidad);
+        unidadService.guardar(unidad);
+
+        return ResponseEntity.ok("Unidad liberada.");
     }
 
     //todo TEST
-    @PostMapping("/habitar")
-    public Unidad habitarUnidad(@RequestBody Unidad unidad){
+    @PostMapping("/habitarPorId/{identificador}")
+    public ResponseEntity<String> habitarUnidad(@PathVariable Long identificador){
+        Unidad unidad = unidadService.buscarPorCodigo(identificador);
+        if (unidad == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
         unidad.habitar();
-        //todo que pasa  si es null?
-        return unidadService.guardar(unidad);
+        unidadService.guardar(unidad);
+
+        return ResponseEntity.ok("Unidad habitada.");
     }
 
 

@@ -49,7 +49,7 @@ public class Reclamo {
 
     @OneToMany(mappedBy = "reclamo")
     @JsonIgnore
-    private List<Imagen> imagens;
+    private List<Imagen> imagenes;
 
 
     public Reclamo() {

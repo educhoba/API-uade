@@ -48,6 +48,8 @@ public class Unidad {
     public Integer getIdentificador() { return identificador;  }
     public String getPiso() {
         return this.piso;
+    } public String getHabitado() {
+        return this.habitado;
     }
 
     private void setHabitado(String habitadoNuevo) {
@@ -82,7 +84,6 @@ public class Unidad {
         return this.reclamos;
     }
 
-    //todo testear
     public Duenio transferir(Persona persona) {
         //eliminar duenios
         //todo no transferir a los inquilinos
@@ -92,7 +93,6 @@ public class Unidad {
         return nuevoDuenio;
     }
 
-    //todo testear
     public Duenio agregarDuenio(Persona persona) {
         List<Persona> due = this.getDuenios();
         Duenio posibleDuenio = null;
@@ -110,7 +110,6 @@ public class Unidad {
             throw new UnidadException("Ya está alquilada.");
     }
 
-    //todo testear
     public Inquilino agregarInquilino(Persona persona) throws UnidadException{
         if(estaAlquilada()){
             return agregarInquilinoPrivate(persona);

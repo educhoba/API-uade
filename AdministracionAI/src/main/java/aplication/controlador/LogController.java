@@ -34,7 +34,6 @@ public class LogController {
     }
 
 
-    // buscas las imagenes de un reclamo, devuelve una lista de imagenes
     @GetMapping("{idLog}")
     public ResponseEntity<List<Log>> buscar(@PathVariable Integer idLog) {
         List<Log> log = logService.buscarPorIdLog(idLog);
