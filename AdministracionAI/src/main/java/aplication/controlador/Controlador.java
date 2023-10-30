@@ -64,14 +64,15 @@ public class Controlador {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body("Unidad transferida.");
 	}
-	//agregarDuenio WIP TODO TESTEAR
+	//agregarDuenio
 	@PostMapping("/agregarDuenioUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}/documento/{documento}")
 	public ResponseEntity<String> agregarDuenioUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero,@PathVariable String documento){
 		try{
 			Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
 			Persona persona = personaService.buscarPersona(documento);
-			unidad.agregarDuenio(persona);
-			unidadService.guardar(unidad);
+			Duenio posibleDuenio = unidad.agregarDuenio(persona);
+			if(posibleDuenio != null)
+				duenioService.guardar(posibleDuenio);
 		}
 		catch (Exception ex){
 			return ResponseEntity.badRequest()
@@ -97,14 +98,15 @@ public class Controlador {
 				.body("Unidad alquilada.");
 	}
 
-	//agregarInquilino WIP TODO TESTEAR
+	//agregarInquilino
 	@PostMapping("/agregarInquilinoUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}/documento/{documento}")
 	public ResponseEntity<String> agregarInquilinoUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero,@PathVariable String documento){
 		try{
 			Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
 			Persona persona = personaService.buscarPersona(documento);
-			unidad.agregarInquilino(persona);
-			unidadService.guardar(unidad);
+			Inquilino posibleInquilino = unidad.agregarInquilino(persona);
+			if(posibleInquilino != null)
+				inquilinoService.guardar(posibleInquilino);
 		}
 		catch (Exception ex){
 			return ResponseEntity.badRequest()

@@ -93,11 +93,14 @@ public class Unidad {
     }
 
     //todo testear
-    public void agregarDuenio(Persona persona) {
+    public Duenio agregarDuenio(Persona persona) {
         List<Persona> due = this.getDuenios();
+        Duenio posibleDuenio = null;
         if(!due.contains(persona)) {
-            this.duenios.add(new Duenio(persona,this));
+            posibleDuenio = new Duenio(persona,this);
+            this.duenios.add(posibleDuenio);
         }
+        return posibleDuenio;
     }
 
     public Inquilino alquilar(Persona persona) throws UnidadException {
