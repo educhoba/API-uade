@@ -30,6 +30,14 @@ public class LogService implements IService<Log, Log> {
         return iRepository.save(log);
     }
 
+    public Log guardarLog(String mail, String mensaje) {
+        Log log = new Log();
+        log.setMail(mail);
+        log.setOperacion(mensaje);
+
+        return iRepository.save(log);
+    }
+
 
     public Log buscarPorCodigo(Long id) {
         Optional<Log> ret = iRepository.findById(id);

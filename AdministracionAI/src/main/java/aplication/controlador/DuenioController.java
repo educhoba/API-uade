@@ -19,6 +19,10 @@ public class DuenioController {
     @Autowired
     private DuenioService duenioService;
 
+    @Autowired
+    private LogService logService;
+
+
     private DuenioController() { }
 
     @GetMapping
@@ -36,6 +40,9 @@ public class DuenioController {
 
     @PostMapping
     public Duenio cargarDuenio(@RequestBody Duenio duenio) {
+        //log
+//        logService.guardarLog(mail, "Se creo un duenio");
+
         return duenioService.guardar(duenio);
     }
 
