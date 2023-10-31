@@ -71,12 +71,12 @@ public class UnidadService implements IService<Unidad, Unidad> {
 
     @Override
     public void eliminar(Unidad entity) {
-        //no se puede elminar una unidad
+        //no se puede eliminar una unidad
     }
 
     @Override
     public Unidad modificar(Unidad unidad, String cambio) {
-        //hacer
+        //no se puede modificar una unidad
         return null;
     }
 

@@ -56,7 +56,6 @@ public class PersonaService implements IService<Persona, Persona> {
         return null;
     }
 
-
     private Persona buscarPorDocumento(String id) {
         Optional<Persona> ret = iRepository.findByDocumento(id);
         return ret.orElse(null);
@@ -91,7 +90,7 @@ public class PersonaService implements IService<Persona, Persona> {
             return ret.get();
         }
         else
-            throw new PersonaException("No existe una persona con ese documento. Contactese a la admin para registrarse.");
+            throw new PersonaException("No existe una persona con ese documento. Contactese a la administración para registrarse.");
     }
     public void registrarUsuario(Persona persona) throws PersonaException {
         Persona p = buscarPersona(persona.getDocumento());
@@ -131,6 +130,6 @@ public class PersonaService implements IService<Persona, Persona> {
             return ret.get();
         }
         else
-            throw new PersonaException("No existe una persona con ese documento. Contactese a la admin para registrarse.");    }
+            throw new PersonaException("No existe una persona con ese email. Contactese a la admin para registrarse.");    }
 
 }
