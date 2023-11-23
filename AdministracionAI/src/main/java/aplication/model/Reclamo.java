@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name="reclamos")
 public class Reclamo {
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idReclamo;
 
     @Column(name = "documento", length = 20, nullable = false)
@@ -116,6 +116,10 @@ public class Reclamo {
     }
 
     //<editor-fold desc="Getters">
+    public int getIdReclamo(){
+        return idReclamo;
+    }
+
     public String getDocumento() {
         return documento;
     }
