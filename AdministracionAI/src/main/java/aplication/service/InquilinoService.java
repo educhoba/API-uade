@@ -1,5 +1,6 @@
 package aplication.service;
 
+import aplication.model.Duenio;
 import aplication.model.Edificio;
 import aplication.model.Inquilino;
 import aplication.model.Unidad;
@@ -33,6 +34,9 @@ public class InquilinoService implements IService<Inquilino,Inquilino> {
             return null;
         }
         return iRepository.save(inquilino);
+    }
+    public List<Inquilino> buscarPorUnidadId(int identificador) {
+        return iRepository.findByIdentificador(identificador);
     }
 
     @Override

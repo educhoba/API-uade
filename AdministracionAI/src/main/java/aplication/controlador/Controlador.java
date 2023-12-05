@@ -116,6 +116,30 @@ public class Controlador {
 				.body("Inquilino agregado.");
 	}
 
+	//liberarUnidad
+	@PostMapping("/liberarUnidad/edificio/{codigoEdificio}/piso/{piso}/numero/{numero}")
+	public ResponseEntity<String> alquilarUnidad(@PathVariable Integer codigoEdificio, @PathVariable String piso,@PathVariable String numero){
+		try{
+			Unidad unidad = unidadService.buscarPorEdificioPisoNumero(codigoEdificio,piso,numero);
+
+			List<Inquilino> inqs = inquilinoService.buscarPorUnidadId(unidad.getIdentificador());
+			for(Inquilino i : inqs){
+				inquilinoService.eliminar(i);
+			}
+
+			unidad.liberar();
+			unidadService.guardar(unidad);
+		}
+		catch (Exception ex){
+			return ResponseEntity.badRequest()
+					.body(ex.getMessage());
+		}
+		return ResponseEntity.status(HttpStatus.OK)
+				.body("Unidad liberada.");
+	}
+
+
+
 	//</editor-fold>
 
 

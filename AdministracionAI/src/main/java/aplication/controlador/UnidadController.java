@@ -135,7 +135,7 @@ public class UnidadController {
         unidad.liberar();
         unidadService.guardar(unidad);
 
-        return ResponseEntity.ok("Unidad liberada.");
+        return ResponseEntity.ok("NO USAR.");
     }
 
     //todo TEST
